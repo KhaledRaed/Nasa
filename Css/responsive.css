@@ -1,0 +1,171 @@
+@media (max-width: 1024px) {
+    .team-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .team-row-2 {
+        gap: 2rem;
+    }
+
+    .team-row-2 .team-member {
+        flex: 0 0 calc(50% - 1rem);
+    }
+}
+
+@media (max-width: 768px) {
+    nav {
+        padding: 1rem 1.5rem;
+    }
+
+    .menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .menu-toggle.active .line-1 {
+        transform: translateY(9px) rotate(45deg);
+    }
+
+    .menu-toggle.active .line-2 {
+        opacity: 0;
+    }
+
+    .menu-toggle.active .line-3 {
+        transform: translateY(-9px) rotate(-45deg);
+    }
+
+    .nav-menu {
+        position: absolute;
+        top: 100%;
+        left: 0;
+        right: 0;
+        flex-direction: column;
+        background: rgba(5, 7, 20, 0.98);
+        backdrop-filter: blur(20px);
+        padding: 0;
+        gap: 0;
+        max-height: 0;
+        overflow: hidden;
+        transition: max-height 0.4s ease;
+    }
+
+    .nav-menu.active {
+        max-height: 400px;
+        padding: 1rem 0;
+    }
+
+    .nav-menu li {
+        width: 100%;
+    }
+
+    .nav-menu li a {
+        display: block;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    #about-us h2,
+    .demo-content h2 {
+        font-size: 2.5rem;
+    }
+
+    #about-us p,
+    .demo-content p {
+        font-size: 1rem;
+    }
+
+    .mission-banner {
+        font-size: 0.7rem;
+    }
+
+    .nav-menu li a {
+        display: block;
+        text-align: center;
+        padding: 1rem;
+    }
+
+    #home .demo-content {
+        padding: 1.5rem;
+        margin: 0 1rem;
+    }
+
+    #home .demo-content h2 {
+        font-size: 2.5rem;
+    }
+
+    #home .demo-content p {
+        font-size: 1rem;
+    }
+
+    #about-us h2,
+    .demo-content h2 {
+        font-size: 2.5rem;
+    }
+
+    #about-us p,
+    .demo-content p {
+        font-size: 1rem;
+    }
+
+    #about-us .desktop-video {
+        display: none;
+    }
+
+    #about-us .mobile-video {
+        display: block;
+    }
+
+    .team-section {
+        padding: 80px 1.5rem;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+    }
+
+    .section-subtitle {
+        font-size: 1rem;
+    }
+
+    .team-row,
+    .team-row-2 {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .team-row-2 .team-member {
+        flex: 1 1 100%;
+        max-width: none;
+    }
+
+    .member-photo {
+        width: 150px;
+        height: 150px;
+    }
+
+    .member-name {
+        font-size: 1.25rem;
+    }
+
+    .logo-icon-container {
+        width: 70px;
+        height: 70px;
+    }
+
+    .logo-text-svg {
+        height: 40px;
+    }
+
+    .logo-title {
+        font-size: 40px;
+        letter-spacing: 2px;
+    }
+
+    .logo-subtitle {
+        font-size: 15px;
+        letter-spacing: 1.5px;
+    }
+
+}

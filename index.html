@@ -1,0 +1,193 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nasa Space Apps</title>
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap"
+        rel="stylesheet">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+
+
+    <link rel="stylesheet" href="Css/stars.css">
+    <link rel="stylesheet" href="Css/header.css">
+    <link rel="stylesheet" href="Css/home.css">
+    <link rel="stylesheet" href="Css/about.css">
+    <link rel="stylesheet" href="Css/team.css">
+    <link rel="stylesheet" href="Css/responsive.css">
+    <style>
+        :root {
+            --color-dark-space: #000000;
+            --color-navy: #0a1128;
+            --color-light-text: #e8edf5;
+            --color-accent-blue: #0ea5e9;
+            --color-accent-red: #dc2626;
+            --gradient-cta: linear-gradient(135deg, #0ea5e9 0%, #0f76d4 100%);
+            --gradient-header: linear-gradient(180deg, rgba(10, 14, 26, 0.9) 0%, rgba(10, 14, 26, 0.7) 100%);
+            --shadow-primary: rgba(14, 165, 233, 0.25);
+            --shadow-hover: rgba(14, 165, 233, 0.5);
+            --transition-speed: 0.3s;
+        }
+
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: "MuseoModerno", sans-serif;
+            font-optical-sizing: auto;
+            font-weight: 200;
+            font-style: normal;
+            background: var(--color-dark-space);
+            color: var(--color-light-text);
+            overflow-x: hidden;
+            line-height: 1.6;
+        }
+    </style>
+</head>
+
+<body>
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="stars-container" id="starsContainer">
+        <div class="nebula"></div>
+        <div class="nebula"></div>
+        <div class="nebula"></div>
+    </div>
+
+    <section id="header-section">
+        <header id="mainHeader">
+            <nav>
+                <a href="#" class="logo" aria-label="Exoquest Home">
+                    <div class="logo-icon-container">
+                        <img src="./midea/logo.png" alt="Exoquest Logo Icon" class="logo-icon">
+                    </div>
+                    <svg class="logo-text-svg" viewBox="0 0 200 50" aria-hidden="true">
+                        <text x="0" y="25" class="logo-title">Exoquest</text>
+                        <text x="0" y="45" class="logo-subtitle">404!!</text>
+                    </svg>
+                </a>
+
+                <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
+                    <span></span>
+                    <span></span>
+                    <span></span>
+                </button>
+
+                <ul class="nav-menu" id="navMenu">
+                    <li><a href="#home" class="active">Home</a></li>
+                    <li><a href="#about-us">About Us</a></li>
+                    <li><a href="#team">Our Team</a></li>
+                    <li><a href="#identify" class="cta-button">Identify</a></li>
+                </ul>
+            </nav>
+        </header>
+    </section>
+
+    <div class="mission-banner" id="missionBanner">
+        <i class="fas fa-satellite"></i> Mission Status: Active
+    </div>
+
+    <main id="main-content">
+        <section id="home">
+            <div class="demo-content">
+                <h2>Welcome to Exoquest</h2>
+                <p>
+                    Discover the wonders of the universe with NASA. From distant galaxies to the planets in our solar
+                    system,
+                    we're pushing the boundaries of human knowledge and exploring the final frontier.
+                </p>
+
+            </div>
+        </section>
+
+        <section id="about-us">
+            <div class="video-background" id="videoBackground">
+                <video class="video-fullscreen desktop-video" autoplay loop muted playsinline preload="auto"
+                    fetchpriority="high">
+                    <source src="./midea/mars.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+
+                <video class="video-fullscreen mobile-video" autoplay loop muted playsinline preload="auto"
+                    fetchpriority="high">
+                    <source src="./midea/mars.mp4" type="video/mp4">
+                    Your browser does not support the video tag.
+                </video>
+            </div>
+
+            <div class="content-overlay">
+                <h2>About Us</h2>
+                <p>
+                    We are a team of Data Analysts, AI enthusiasts, and Web Developers from the University of Jordan,
+                    brought together by our interest in discovery and technology.
+
+                    Our goal is to use machine learning and AI to make sense of large astronomical datasets. With skills
+                    in data analysis, AI model building, and web development, we work together to solve the challenge of
+                    exoplanet identification.
+                </p>
+
+            </div>
+        </section>
+
+        <section id="team" class="team-section">
+            <h2 class="section-title">Meet Our Mission Team</h2>
+            <p class="section-subtitle">The brilliant minds driving the future of space exploration.</p>
+            <div class="team-grid">
+                <div class="team-member">
+                    <img src="./midea/Qusai Abu Ghannam.jpeg" alt="" class="member-photo">
+                    <h3>Qusai Abu-Ghannam</h3>
+                    <p class="member-title">AI Developer</p>
+                </div>
+                <div class="team-member">
+                    <img src="./midea/Mohammad Ghabboun.jpg" alt="" class="member-photo">
+                    <h3>Mohammad Ghabboun</h3>
+                    <p class="member-title">Data analyst</p>
+                </div>
+                <div class="team-member">
+                    <img src="./midea/khaled raed.jpg" alt="" class="member-photo">
+                    <h3>Khaled Raed</h3>
+                    <p class="member-title">Front-End Developer</p>
+                </div>
+                <div class="team-member">
+                    <img src="./midea/ALBARA SAMER .JPG" alt="Photo of Zara Khan" class="member-photo">
+                    <h3>Albara Samer</h3>
+                    <p class="member-title">AI Developer</p>
+                </div>
+                <div class="team-member">
+                    <img src="./midea/Omar Aldamiri.jpg" alt="Photo of Kenji Tanaka" class="member-photo">
+                    <h3>Omar Al-Damiri</h3>
+                    <p class="member-title">Back-End Developer</p>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <footer>
+        <div class="footer-content">
+            <div class="social-links">
+                <a href="#" aria-label="NASA Twitter"><i class="fab fa-twitter"></i></a>
+                <a href="#" aria-label="NASA Facebook"><i class="fab fa-facebook"></i></a>
+                <a href="#" aria-label="NASA Instagram"><i class="fab fa-instagram"></i></a>
+                <a href="#" aria-label="NASA YouTube"><i class="fab fa-youtube"></i></a>
+            </div>
+            <p class="copyright">© 2023 NASA Space Exploration. All rights reserved.</p>
+        </div>
+    </footer>
+
+    <script src="Js/stars.js"></script>
+    <script src="Js/header.js"></script>
+    <script src="Js/about.js"></script>
+</body>
+
+</html>
