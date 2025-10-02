@@ -33,15 +33,15 @@ window.addEventListener('scroll', () => {
 const sections = document.querySelectorAll('section[id]');
 const navLinks = document.querySelectorAll('.nav-menu a');
 
-const offset = 80; 
+const offset = 80;
 
 window.addEventListener('scroll', () => {
     let current = '';
-    
+
     sections.forEach(section => {
         const sectionTop = section.offsetTop;
         const sectionHeight = section.clientHeight;
-        
+
         if (window.scrollY >= (sectionTop - offset)) {
             current = section.getAttribute('id');
         }

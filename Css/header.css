@@ -43,10 +43,10 @@ nav {
     display: flex;
     align-items: center;
     gap: 1.25rem;
-    /* Increased gap */
     text-decoration: none;
-    transition: transform var(--transition-speed) ease;
+    transition: transform 0.3s ease;
     animation: fadeIn 0.6s ease-out 0.2s both;
+    z-index: 1002;
 }
 
 @keyframes fadeIn {
@@ -62,45 +62,27 @@ nav {
 }
 
 .logo:hover {
-    transform: translateY(-2px);
+    transform: scale(1.02);
 }
 
-/* Updated logo image container style: INCREASED SIZE */
 .logo-icon-container {
     width: 60px;
-    /* Increased from 48px */
     height: 60px;
-    /* Increased from 48px */
     border-radius: 50%;
     border: 2px solid rgba(14, 165, 233, 0.3);
     background: var(--color-navy);
     display: flex;
     align-items: center;
     justify-content: center;
-    transition: all var(--transition-speed) ease;
-    animation: rotate 0.6s ease-out 0.3s both;
+    transition: all 0.3s ease;
     overflow: hidden;
     position: relative;
-    /* Add a subtle rotation on hover */
-    transform: rotate(0deg);
-}
-
-@keyframes rotate {
-    from {
-        transform: rotate(-180deg) scale(0);
-        opacity: 0;
-    }
-
-    to {
-        transform: rotate(0) scale(1);
-        opacity: 1;
-    }
 }
 
 .logo:hover .logo-icon-container {
     border-color: var(--color-accent-blue);
-    box-shadow: 0 0 20px var(--shadow-primary);
-    transform: rotate(10deg);
+    box-shadow: 0 0 20px rgba(14, 165, 233, 0.4);
+    transform: rotate(360deg) scale(1.1);
 }
 
 .logo-icon-container img {
@@ -110,11 +92,8 @@ nav {
     border-radius: 50%;
 }
 
-
-/* SVG Logo Text Styling: INCREASED SIZE */
 .logo-text-svg {
     height: 50px;
-    /* Increased from 40px */
     width: auto;
     overflow: visible;
 }
@@ -122,21 +101,21 @@ nav {
 .logo-title {
     fill: var(--color-light-text);
     font-size: 28px;
-    /* Increased from 20px (Larger Name) */
     font-weight: 700;
     letter-spacing: 2.5px;
-    /* Slightly increased spacing for large text */
-    /* Using the main font for SVG text */
     font-family: "MuseoModerno", sans-serif;
+    transition: fill 0.3s ease;
+}
+
+.logo:hover .logo-title {
+    fill: var(--color-accent-blue);
 }
 
 .logo-subtitle {
     fill: rgba(232, 237, 245, 0.7);
     font-size: 12px;
-    /* Increased from 10px (Larger Subtitle) */
     font-weight: 400;
     letter-spacing: 2px;
-    /* Slightly increased spacing */
     text-transform: uppercase;
     font-family: "MuseoModerno", sans-serif;
 }
@@ -187,14 +166,15 @@ nav {
     font-weight: 500;
     padding: 0.65rem 1.25rem;
     border-radius: 6px;
-    transition: all 0.2s ease;
+    transition: all 0.3s ease;
     position: relative;
+    display: inline-block;
 }
 
 .nav-menu li a::before {
     content: '';
     position: absolute;
-    bottom: 0;
+    bottom: 5px;
     left: 50%;
     width: 0;
     height: 2px;
@@ -203,24 +183,23 @@ nav {
     transition: width 0.3s ease;
 }
 
-.nav-menu li a:hover::before,
-.nav-menu li a:focus::before {
-    width: 60%;
+.nav-menu li a:hover {
+    color: var(--color-accent-blue);
+    background: rgba(14, 165, 233, 0.1);
+    transform: translateY(-2px);
 }
 
-.nav-menu li a:hover,
-.nav-menu li a:focus {
-    color: var(--color-accent-blue);
-    background: rgba(14, 165, 233, 0.08);
+.nav-menu li a:hover::before {
+    width: 70%;
 }
 
 .nav-menu li a.active {
     color: var(--color-accent-blue);
-    background: rgba(14, 165, 233, 0.12);
+    background: rgba(14, 165, 233, 0.15);
 }
 
 .nav-menu li a.active::before {
-    width: 60%;
+    width: 70%;
 }
 
 .cta-button {
@@ -229,11 +208,10 @@ nav {
     padding: 0.65rem 1.75rem !important;
     border-radius: 6px;
     font-weight: 600;
-    box-shadow: 0 4px 20px var(--shadow-primary);
-    transition: all var(--transition-speed) ease;
+    box-shadow: 0 4px 20px rgba(14, 165, 233, 0.3);
+    transition: all 0.3s ease;
     position: relative;
     overflow: hidden;
-    /* Adding a subtle depth effect */
     border: 1px solid rgba(255, 255, 255, 0.2);
 }
 
@@ -254,20 +232,8 @@ nav {
 
 .cta-button:hover {
     transform: translateY(-3px) scale(1.05) !important;
-    box-shadow: 0 10px 40px var(--shadow-hover) !important;
-    animation: glow 1.5s ease-in-out infinite;
-}
-
-@keyframes glow {
-
-    0%,
-    100% {
-        box-shadow: 0 10px 40px var(--shadow-hover);
-    }
-
-    50% {
-        box-shadow: 0 10px 50px rgba(14, 165, 233, 0.7);
-    }
+    box-shadow: 0 8px 30px rgba(14, 165, 233, 0.5) !important;
+    background: linear-gradient(135deg, #0f76d4 0%, #0ea5e9 100%) !important;
 }
 
 .menu-toggle {
@@ -278,6 +244,8 @@ nav {
     border: none;
     cursor: pointer;
     padding: 8px;
+    z-index: 1002;
+    position: relative;
 }
 
 .menu-toggle span {
@@ -288,8 +256,14 @@ nav {
     transition: all 0.3s ease;
 }
 
+/* Updated style to keep the accent color when active */
+.menu-toggle:hover span,
+.menu-toggle.active span {
+    background: var(--color-accent-blue);
+}
+
 .menu-toggle.active span:nth-child(1) {
-    transform: rotate(45deg) translate(8px, 8px);
+    transform: translateY(8.5px) rotate(45deg);
 }
 
 .menu-toggle.active span:nth-child(2) {
@@ -297,5 +271,6 @@ nav {
 }
 
 .menu-toggle.active span:nth-child(3) {
-    transform: rotate(-45deg) translate(8px, -8px);
+    transform: translateY(-8.5px) rotate(-45deg);
+
 }
