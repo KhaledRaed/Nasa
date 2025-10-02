@@ -71,7 +71,6 @@
 }
 
 .team-row-2 .team-member {
-    /* Allows members to grow equally, while max-width prevents them from getting too wide */
     flex: 1 1 300px;
     max-width: 350px; 
 }
