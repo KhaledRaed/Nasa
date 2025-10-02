@@ -25,21 +25,24 @@
 
 .team-grid {
     display: flex;
+    /* Stacks the two rows vertically */
     flex-direction: column;
     gap: 3rem;
 }
 
-
+/* Top Row: 3 members */
 .team-row {
     display: grid;
+    /* Creates 3 equal columns */
     grid-template-columns: repeat(3, 1fr);
     gap: 3rem;
     width: 100%;
 }
 
-
+/* Bottom Row: 2 members, centered */
 .team-row-2 {
     display: flex;
+    /* Centers the members in the flex container */
     justify-content: center; 
     gap: 3rem;
 }
@@ -68,7 +71,8 @@
 }
 
 .team-row-2 .team-member {
-    flex: 0 0 calc(33.333% - 2rem); 
+    /* Allows members to grow equally, while max-width prevents them from getting too wide */
+    flex: 1 1 300px;
     max-width: 350px; 
 }
 
@@ -82,6 +86,3 @@
     box-shadow: 0 0 10px rgba(14, 165, 233, 0.3);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
-
-
-
