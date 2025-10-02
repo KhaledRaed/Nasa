@@ -25,25 +25,26 @@
 
 .team-grid {
     display: flex;
-    /* Stacks the two rows vertically */
     flex-direction: column;
     gap: 3rem;
 }
 
-/* Top Row: 3 members */
 .team-row {
+    font-family: "Space Mono", monospace;
+    font-weight: 400;
+    font-style: normal;
     display: grid;
-    /* Creates 3 equal columns */
     grid-template-columns: repeat(3, 1fr);
     gap: 3rem;
     width: 100%;
 }
 
-/* Bottom Row: 2 members, centered */
 .team-row-2 {
+    font-family: "Space Mono", monospace;
+    font-weight: 400;
+    font-style: normal;
     display: flex;
-    /* Centers the members in the flex container */
-    justify-content: center; 
+    justify-content: center;
     gap: 3rem;
 }
 
@@ -60,28 +61,29 @@
 
 
 .team-member:hover {
-    transform: translateY(-5px) scale(1.02); 
+    transform: translateY(-5px) scale(1.02);
     box-shadow: 0 15px 40px rgba(14, 165, 233, 0.3);
     border-color: rgba(14, 165, 233, 0.4);
 }
 
 .team-member:hover .member-photo {
-    transform: scale(1.05); 
-    box-shadow: 0 0 15px rgba(14, 165, 233, 0.5); 
+    transform: scale(1.05);
+    box-shadow: 0 0 15px rgba(14, 165, 233, 0.5);
 }
 
 .team-row-2 .team-member {
+
     flex: 1 1 300px;
-    max-width: 350px; 
+    max-width: 350px;
 }
 
 .member-photo {
-    width: 180px; 
-    height: 180px; 
-    border-radius: 8px; 
+    width: 180px;
+    height: 180px;
+    border-radius: 8px;
     object-fit: cover;
     margin-bottom: 1.5rem;
-    border: 2px solid var(--color-accent-blue); 
+    border: 2px solid var(--color-accent-blue);
     box-shadow: 0 0 10px rgba(14, 165, 233, 0.3);
     transition: transform 0.3s ease, box-shadow 0.3s ease;
 }
