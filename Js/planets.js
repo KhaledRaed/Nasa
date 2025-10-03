@@ -27,7 +27,7 @@ document.addEventListener('DOMContentLoaded', () => {
         '51 Pegasi b': {
             title: '51 Pegasi b: The First Found',
             article: 'Discovered in 1995, 51 Pegasi b was the very first exoplanet found orbiting a sun-like star. Its discovery began the modern era of exoplanet research and revealed a new class of planets: "Hot Jupiters"—gas giants orbiting very close to their stars. It opened the floodgates for thousands of subsequent discoveries.',
-            image1: './mediagasgiant-7.jpg',
+            image1: './media/gasgiant-7.jpg',
             readMore: 'https://exoplanets.nasa.gov/exoplanet-catalog/40/51-pegasi-b/'
         }
     };
