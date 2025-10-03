@@ -1,0 +1,405 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Exoplanet Identification Results</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700;display=swap"
+        rel="stylesheet">
+
+    <style>
+        :root {
+            --color-dark-space: #000000;
+            --color-navy: #0a1128;
+            --color-light-text: #e8edf5;
+            --color-accent-blue: #0ea5e9;
+            --color-accent-purple: #a855f7;
+            --color-accent-red: #dc2626;
+            --gradient-cta: linear-gradient(135deg, #0ea5e9 0%, #a855f7 100%);
+            --shadow-primary: rgba(14, 165, 233, 0.25);
+            --shadow-hover: rgba(14, 165, 233, 0.5);
+            --transition-speed: 0.3s;
+        }
+
+        body {
+            font-family: "MuseoModerno", sans-serif;
+            background: var(--color-dark-space);
+            color: var(--color-light-text);
+            line-height: 1.6;
+            min-height: 100vh;
+            overflow-x: hidden;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+        }
+
+        .stars-container {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            pointer-events: none;
+            z-index: -1;
+            background: radial-gradient(ellipse at center,
+                    rgba(10, 17, 40, 1) 0%,
+                    rgba(0, 0, 0, 1) 100%);
+        }
+
+        .nebula {
+            position: absolute;
+            width: 600px;
+            height: 600px;
+            border-radius: 50%;
+            background: radial-gradient(circle, rgba(138, 43, 226, 0.15) 0%, rgba(138, 43, 226, 0.08) 30%, transparent 70%);
+            filter: blur(40px);
+            animation: float 60s infinite ease-in-out;
+            opacity: 0.5;
+        }
+
+        .nebula:nth-child(2) {
+            background: radial-gradient(circle, rgba(30, 144, 255, 0.15) 0%, rgba(30, 144, 255, 0.08) 30%, transparent 70%);
+            width: 800px;
+            height: 800px;
+            animation-duration: 80s;
+            animation-delay: -20s;
+            top: 20%;
+            left: 60%;
+        }
+
+        .nebula:nth-child(3) {
+            background: radial-gradient(circle, rgba(255, 20, 147, 0.15) 0%, rgba(255, 20, 147, 0.08) 30%, transparent 70%);
+            width: 500px;
+            height: 500px;
+            animation-duration: 70s;
+            animation-delay: -40s;
+            top: 60%;
+            left: 20%;
+        }
+
+        .nebula:nth-child(4) {
+            background: radial-gradient(circle, rgba(14, 165, 233, 0.12) 0%, rgba(14, 165, 233, 0.06) 30%, transparent 70%);
+            width: 700px;
+            height: 700px;
+            animation-duration: 90s;
+            animation-delay: -60s;
+            top: 40%;
+            left: 80%;
+        }
+
+        @keyframes float {
+
+            0%,
+            100% {
+                transform: translate(0, 0) scale(1);
+            }
+
+            33% {
+                transform: translate(30px, -30px) scale(1.1);
+            }
+
+            66% {
+                transform: translate(-20px, 20px) scale(0.9);
+            }
+        }
+
+        .glass-card {
+            background: rgba(10, 17, 40, 0.8);
+            backdrop-filter: blur(8px);
+            border: 1px solid rgba(14, 165, 233, 0.3);
+            box-shadow: 0 0 40px var(--shadow-primary);
+        }
+
+        #chatbox {
+            height: 500px;
+        }
+
+        .chat-message {
+            background: rgba(14, 165, 233, 0.15);
+            border-radius: 1rem 1rem 1rem 0;
+        }
+
+        .ai-message {
+            background: rgba(168, 85, 247, 0.15);
+            border-radius: 1rem 1rem 0 1rem;
+        }
+
+        .result-title {
+            text-shadow: 0 0 10px rgba(14, 165, 233, 0.8);
+            letter-spacing: 2px;
+        }
+
+        .parameter-label {
+            font-family: 'Space Mono', monospace;
+            color: var(--color-accent-blue);
+        }
+        
+        /* NEW FLEXIBLE GRID CLASS for optimal responsiveness */
+        .responsive-data-grid {
+            /* Create columns that auto-fit. Each column will be at least 150px wide. */
+            grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
+        }
+    </style>
+</head>
+
+<body class="p-4 sm:p-8">
+    <div class="stars-container" id="starsContainer">
+        <div class="nebula" style="top: 10%; left: 10%;"></div>
+        <div class="nebula" style="top: 70%; left: 70%;"></div>
+        <div class="nebula" style="top: 30%; left: 40%;"></div>
+        <div class="nebula" style="top: 50%; left: 10%;"></div>
+    </div>
+
+    <div class="w-full max-w-7xl mx-auto z-10">
+        <header class="text-center mb-8">
+            <h1 class="text-4xl sm:text-5xl font-extrabold result-title">
+                Exoplanet Identification Complete
+            </h1>
+            <p class="text-xl text-gray-400 mt-2">
+                Mission Success: Review Analysis and Consult the Astro-AI.
+            </p>
+        </header>
+
+        <div class="flex flex-col lg:flex-row gap-8">
+
+            <div class="lg:w-1/2 w-full p-6 glass-card rounded-xl">
+                <h2 class="text-2xl font-semibold mb-4 text-center border-b pb-3 border-gray-700">
+                    <i class="fas fa-microscope text-2xl mr-2 text-blue-400"></i> Input Parameters Analysis
+                </h2>
+                <div id="data-list"
+                    class="grid responsive-data-grid gap-y-4 gap-x-4 pr-2"></div>
+                </div>
+
+            <div class="lg:w-1/2 w-full p-6 glass-card rounded-xl flex flex-col">
+                <h2 class="text-2xl font-semibold mb-4 text-center border-b pb-3 border-gray-700">
+                    <i class="fas fa-robot text-2xl mr-2 text-purple-400"></i> Astro-AI Assistant
+                </h2>
+
+                <div id="ai-result-summary" class="bg-gray-900/50 p-3 rounded-lg mb-4 border-l-4 border-purple-500">
+                    <p class="text-lg font-bold text-purple-300">Final Classification:</p>
+                    <p id="classification-text" class="text-3xl font-extrabold text-blue-400 mt-1"></p>
+                    <p id="confidence-text" class="text-sm text-gray-400"></p>
+                </div>
+
+                <div id="chatbox" class="flex-grow overflow-y-auto space-y-4 p-3 mb-4 rounded-lg bg-gray-900/40">
+                    <div class="flex justify-start">
+                        <div class="ai-message p-3 max-w-[80%]">
+                            <i class="fas fa-robot text-purple-400 mr-2"></i>
+                            <span id="initial-ai-response"></span>
+                        </div>
+                    </div>
+                </div>
+
+                <form id="chat-form" class="flex gap-3">
+                    <input type="text" id="chat-input" placeholder="Ask about the result or exoplanets..."
+                        class="flex-grow p-3 rounded-xl bg-gray-800 text-white border border-gray-700 focus:outline-none focus:border-blue-500"
+                        required>
+                    <button type="submit" id="send-button"
+                        class="px-5 py-3 rounded-xl bg-gradient-to-r from-blue-500 to-purple-500 hover:from-blue-600 hover:to-purple-600 transition duration-200 font-semibold shadow-lg shadow-purple-500/30">
+                        <i class="fas fa-paper-plane"></i>
+                    </button>
+                </form>
+                <div id="loading-indicator" class="text-center mt-2 text-purple-400 hidden">
+                    <i class="fas fa-spinner fa-spin mr-2"></i> Analyzing your question...
+                </div>
+            </div>
+
+        </div>
+    </div>
+
+    <script>
+        // --- OPENAI API CONFIG ---
+        const apiKey = ""; // <---- IMPORTANT: Paste your OpenAI API key here for authentication.
+        const apiUrl = "https://api.openai.com/v1/chat/completions"; 
+        const modelName = "gpt-4o-mini"; 
+
+        // Simulated Exoplanet Data (The core data the AI uses for context)
+        const simulatedInputData = [
+            { label: "Orbital Period", value: 3.5225, unit: "days", description: "Time to orbit the star." },
+            { label: "Transit Duration", value: 2.96, unit: "hours", description: "Time planet blocks starlight." },
+            { label: "Stellar Mass", value: 0.82, unit: "M☉", description: "Mass of the host star." },
+            { label: "Stellar Radius", value: 0.78, unit: "R☉", description: "Size of the host star." },
+            { label: "Stellar Temp", value: 5200, unit: "K", description: "Surface temp of the star." },
+            { label: "Planet Radius", value: 1.25, unit: "R🜨", description: "Size of the exoplanet." },
+            { label: "Planet Mass", value: 2.1, unit: "M🜨", description: "Mass of the exoplanet." },
+            { label: "Equilibrium Temp", value: 305, unit: "K", description: "Estimated surface temp." },
+            { label: "Insolation Flux", value: 1.5, unit: "flux", description: "Energy received from the star." },
+            { label: "Eccentricity", value: 0.0, unit: "", description: "Orbital path shape." },
+            { label: "Density", value: 4.8, unit: "g/cm³", description: "Average density of the planet." },
+            { label: "Transits Count", value: 150, unit: "", description: "Number of observed transits." },
+            { label: "Detection Method", value: 1, unit: "", description: "Encoded detection method." },
+            { label: "Semi-Major Axis", value: 0.045, unit: "AU", description: "Distance from the star." },
+            { label: "Albedo", value: 0.35, unit: "", description: "Reflectivity of the planet." }
+        ];
+
+        // The primary classification result (simulated AI output)
+        const simulatedResult = {
+            classification: "Confirmed Super-Earth",
+            confidence_score: 0.985,
+            result_detail: "This object exhibits characteristics consistent with a Super-Earth planet within the habitable zone of a K-type dwarf star."
+        };
+
+        let chatHistory = []; 
+
+        const SYSTEM_INSTRUCTION = `You are Astro-AI, an expert in exoplanet classification and astronomy.
+Your current context is the analysis of a celestial body classified as: **${simulatedResult.classification}** with a confidence score of **${(simulatedResult.confidence_score * 100).toFixed(1)}%**.
+Answer all user questions concisely and clearly.
+Use LaTeX formatting for equations.
+Keep the tone informative and encouraging.`;
+
+        // ----------------------------------------------------------------------
+
+        // --- Init Page ---
+        function initPage() {
+            const dataList = document.getElementById('data-list'); 
+
+            // Loop through the simulated data to create and insert data cards into the UI.
+            simulatedInputData.forEach(item => {
+                const itemHtml = `
+            <div class="flex flex-col p-3 rounded-lg bg-gray-800/50 hover:bg-gray-700/50 transition duration-200 cursor-pointer group">
+            <p class="parameter-label text-xs font-bold uppercase text-blue-400 mb-1">${item.label}</p>
+            <p class="text-xl font-extrabold text-white">
+                ${item.value} <span class="text-sm text-gray-400">${item.unit}</span>
+            </p>
+            <p class="text-gray-500 text-xs mt-1 italic opacity-0 group-hover:opacity-100 transition">${item.description}</p>
+           </div>`;
+                dataList.innerHTML += itemHtml; 
+            });
+
+            // Set the classification and confidence text in the main header/summary area.
+            document.getElementById('classification-text').textContent = simulatedResult.classification;
+            document.getElementById('confidence-text').textContent = `Confidence: ${(simulatedResult.confidence_score * 100).toFixed(1)}%`;
+
+            // Construct the first message from the AI.
+            const initialMessage = `Welcome! Based on the input parameters, this body is classified as a **${simulatedResult.classification}**. ${simulatedResult.result_detail}. How can I assist you?`;
+            document.getElementById('initial-ai-response').innerHTML = initialMessage; 
+            // Add the initial message to the history so the AI remembers it.
+            chatHistory.push({ role: "assistant", parts: [{ text: initialMessage }] });
+
+            // Set up the event listener for the chat form submission.
+            document.getElementById('chat-form').addEventListener('submit', handleChatSubmit);
+        }
+
+        // ----------------------------------------------------------------------
+
+        // --- OpenAI API Call ---
+        async function getOpenAIResponse() {
+            const messages = []; 
+            messages.push({ role: "system", content: SYSTEM_INSTRUCTION }); 
+
+            // Loop through the local chatHistory and map it to the API's required message structure.
+            chatHistory.forEach(msg => {
+                if (msg.role === "user") {
+                    messages.push({ role: "user", content: msg.parts[0].text });
+                } else if (msg.role === "assistant" || msg.role === "model") {
+                    messages.push({ role: "assistant", content: msg.parts[0].text });
+                }
+            });
+
+            try {
+                // Send the POST request to the OpenAI endpoint.
+                const response = await fetch(apiUrl, {
+                    method: "POST",
+                    headers: {
+                        "Content-Type": "application/json",
+                        "Authorization": `Bearer ${apiKey}` 
+                    },
+                    body: JSON.stringify({
+                        model: modelName,
+                        messages: messages, 
+                        temperature: 0.7 
+                    })
+                });
+
+                if (!response.ok) {
+                    throw new Error(`API call failed with status: ${response.status}`); 
+                }
+
+                const result = await response.json(); 
+                // Return the AI's generated text content.
+                return result.choices[0].message.content.trim();
+            } catch (error) {
+                console.error("OpenAI API Error:", error);
+                return "I am currently unable to connect. Please try again later. Ensure your API key is correct!"; 
+            }
+        }
+
+        // ----------------------------------------------------------------------
+
+        // --- Chat UI ---
+        function appendMessage(sender, text) {
+            const chatbox = document.getElementById('chatbox'); 
+            const messageContainer = document.createElement('div');
+            messageContainer.className = `flex ${sender === 'user' ? 'justify-end' : 'justify-start'}`;
+
+            const messageBubble = document.createElement('div');
+            messageBubble.className = `p-3 max-w-[80%] text-sm rounded-xl shadow-md`;
+
+            if (sender === 'user') {
+                messageBubble.className += ' chat-message text-right bg-blue-500/20 text-white';
+                messageBubble.style.borderRadius = '1rem 1rem 0 1rem';
+                messageBubble.textContent = text;
+            } else {
+                messageBubble.className += ' ai-message bg-purple-500/20 text-white';
+                messageBubble.innerHTML = `<i class="fas fa-robot text-purple-400 mr-2"></i>${text}`;
+                messageBubble.style.borderRadius = '1rem 1rem 1rem 0';
+            }
+
+            messageContainer.appendChild(messageBubble);
+            chatbox.appendChild(messageContainer); 
+            chatbox.scrollTop = chatbox.scrollHeight; 
+        }
+
+        // ----------------------------------------------------------------------
+
+        /**
+         * SECTION 5: Chat Submission Handler
+         * Manages the user input, loading state, API call, and chat update cycle.
+         */
+        async function handleChatSubmit(e) {
+            e.preventDefault(); 
+            const inputField = document.getElementById('chat-input');
+            const userQuery = inputField.value.trim();
+            const sendButton = document.getElementById('send-button');
+            const loadingIndicator = document.getElementById('loading-indicator');
+
+            if (userQuery === "") return; 
+
+            appendMessage('user', userQuery); 
+            chatHistory.push({ role: "user", parts: [{ text: userQuery }] }); 
+            inputField.value = ""; 
+
+            // Set loading state: disable button and show spinner.
+            sendButton.disabled = true;
+            sendButton.innerHTML = `<i class="fas fa-satellite-dish fa-spin"></i>`;
+            loadingIndicator.classList.remove('hidden');
+
+            // Call the OpenAI API and await the response.
+            const aiResponseText = await getOpenAIResponse();
+
+            appendMessage('assistant', aiResponseText); 
+            chatHistory.push({ role: "assistant", parts: [{ text: aiResponseText }] }); 
+
+            // Reset loading state: enable button and restore icon.
+            sendButton.disabled = false;
+            sendButton.innerHTML = `<i class="fas fa-paper-plane"></i>`;
+            loadingIndicator.classList.add('hidden');
+        }
+
+        // ----------------------------------------------------------------------
+
+        /**
+         * SECTION 6: Entry Point
+         * Ensures the main setup function runs after all HTML elements are loaded.
+         */
+        window.onload = initPage;
+    </script>
+</body>
+
+</html>
