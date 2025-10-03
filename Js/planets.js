@@ -1,39 +1,33 @@
 document.addEventListener('DOMContentLoaded', () => {
-    // Step 4: Store information about each planet
     const planetsData = {
         'Kepler-186f': {
             title: 'Kepler-186f: Earth\'s Cousin',
             article: 'Kepler-186f is the first Earth-size planet orbiting a star in the habitable zone. Discovered by NASA’s Kepler Space Telescope, this world orbits an M dwarf star and receives about a third of the energy from its star that Earth receives from the Sun. It gives us hope that life-supporting worlds are common in the galaxy.',
-            image1: './Nasa/midea/HR_8799_chart.jpg', // Replace with actual path
-            image2: '', // Replace with actual path
+            image1: './media/HR_8799_chart.jpg', // Path corrected to './media/'
             readMore: 'https://www.nasa.gov/general/kepler-186f/'
         },
         'TRAPPIST-1e': {
             title: 'TRAPPIST-1e: A World of Many Siblings',
             article: 'Part of a system with seven Earth-sized planets, TRAPPIST-1e is considered one of the most promising for follow-up observations. It is situated in the system\'s habitable zone, meaning liquid water could exist on its surface. The planets are so close to each other that an observer might see the geological features or clouds of neighboring worlds.',
-            image1: './midea/trappist-1e-primary.jpg', // Replace with actual path
-            image2: './midea/trappist-1e-secondary.jpg', // Replace with actual path
+            image1: './media/trappist-1e-primary.jpg', // Path corrected to './media/'
             readMore: 'https://www.nasa.gov/general/trappist-1e/'
         },
         'HD 209458 b': {
             title: 'HD 209458 b: The Evaporating Giant',
             article: 'A classic "hot Jupiter," this planet was the first exoplanet detected through its transit of its star. More famously, it was the first to have an atmosphere spectroscopically observed. Due to its proximity to its star, its atmosphere is being dramatically stripped away, creating a giant hydrogen tail similar to a comet.',
-            image1: './midea/hd-209458b-primary.jpg', // Replace with actual path
-            image2: './midea/hd-209458b-secondary.jpg', // Replace with actual path
+            image1: './media/hd-209458b-primary.jpg', // Path corrected to './media/'
             readMore: 'https://exoplanets.nasa.gov/exoplanet-catalog/1359/hd-209458-b/'
         },
         'WASP-12b': {
             title: 'WASP-12b: The Planet Being Eaten',
             article: 'WASP-12b is one of the hottest known exoplanets, orbiting its star in just over a day. Its orbit is so tight that the star\'s tidal forces are distorting the planet into an egg shape and ripping its atmospheric material away. This planet is destined to be completely consumed by its star within a short span of geological time.',
-            image1: './midea/wasp-12b-primary.jpg', // Replace with actual path
-            image2: './midea/wasp-12b-secondary.jpg', // Replace with actual path
+            image1: './media/wasp-12b-primary.jpg', // Path corrected to './media/'
             readMore: 'https://www.nasa.gov/general/wasp-12b/'
         },
         '51 Pegasi b': {
             title: '51 Pegasi b: The First Found',
             article: 'Discovered in 1995, 51 Pegasi b was the very first exoplanet found orbiting a sun-like star. Its discovery began the modern era of exoplanet research and revealed a new class of planets: "Hot Jupiters"—gas giants orbiting very close to their stars. It opened the floodgates for thousands of subsequent discoveries.',
-            image1: './midea/51pegasi-b-primary.jpg', // Replace with actual path
-            image2: './midea/51pegasi-b-secondary.jpg', // Replace with actual path
+            image1: './media/51pegasi-b-primary.jpg', // Path corrected to './media/'
             readMore: 'https://exoplanets.nasa.gov/exoplanet-catalog/40/51-pegasi-b/'
         }
     };
@@ -43,7 +37,7 @@ document.addEventListener('DOMContentLoaded', () => {
     const planetTitle = document.getElementById('planet-title');
     const planetDescription = document.getElementById('planet-description');
     const imagePrimary = document.getElementById('image-primary');
-    const imageSecondary = document.getElementById('image-secondary');
+    // Removed imageSecondary from DOM query
     const readMoreLink = document.getElementById('read-more-link');
     const detailsCard = document.getElementById('planet-details-card');
 
@@ -55,7 +49,7 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Start fade out/reset
         imagePrimary.classList.remove('loaded');
-        imageSecondary.classList.remove('loaded');
+        // Removed imageSecondary logic
         detailsCard.style.opacity = '0';
 
         setTimeout(() => {
@@ -65,16 +59,15 @@ document.addEventListener('DOMContentLoaded', () => {
             readMoreLink.href = data.readMore;
             readMoreLink.style.display = 'block';
 
-            // Update Images
+            // Update Image
             imagePrimary.src = data.image1;
-            imageSecondary.src = data.image2;
+            // Removed imageSecondary update
 
-            // Fade in logic after images are loaded
+            // Fade in logic after image is loaded
             imagePrimary.onload = () => imagePrimary.classList.add('loaded');
-            imageSecondary.onload = () => imageSecondary.classList.add('loaded');
 
             if (imagePrimary.complete) imagePrimary.classList.add('loaded');
-            if (imageSecondary.complete) imageSecondary.classList.add('loaded');
+            // Removed imageSecondary complete check
 
             // Fade in the card
             detailsCard.style.opacity = '1';
