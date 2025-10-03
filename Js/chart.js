@@ -123,11 +123,11 @@ document.addEventListener('DOMContentLoaded', () => {
             // Offset label position slightly outside the grid
             const labelPoint = getPoint(centerX, centerY, angle, size + 20);
             
-            // Simplified label text to account for lack of in-canvas LaTeX rendering
+            // Simplified label text
             const displayText = labels[i]
                                 .replace(/\s*\(.*?\)\s*/g, '') // Remove (Units)
-                                .replace(/\$/g, '') // Remove dollar signs
-                                .trim(); 
+                                .replace(/\$.*?\$/g, '') // Remove LaTeX math units
+                                .trim();
 
             ctx.fillText(displayText, labelPoint.x, labelPoint.y);
         }
@@ -144,15 +144,13 @@ document.addEventListener('DOMContentLoaded', () => {
     function drawPlanetData(planet, size, centerX, centerY, offset) {
         ctx.beginPath();
         const dataValues = Object.values(planet.data);
-        const points = [];
-
+        
         dataValues.forEach((value, i) => {
             const angle = i * 2 * Math.PI / numPoints + rotation;
             // Introduce a subtle "wobble" or "pulse" animation based on offset
             const pulse = 1 + 0.03 * Math.sin(i * 0.5 + offset);
             const radius = size * value * pulse;
             const point = getPoint(centerX, centerY, angle, radius);
-            points.push(point);
 
             if (i === 0) {
                 ctx.moveTo(point.x, point.y);
@@ -167,7 +165,8 @@ document.addEventListener('DOMContentLoaded', () => {
             ctx.fill();
         });
 
-        ctx.closePath(); // Automatically closes the path from the last point to the first
+        // Close the path (connects the last point to the first)
+        ctx.closePath(); 
 
         // Fill the polygon with a slight glow/holographic effect
         ctx.fillStyle = planet.color.replace('0.7', '0.15'); // Very light fill
@@ -181,8 +180,8 @@ document.addEventListener('DOMContentLoaded', () => {
         ctx.stroke();
         ctx.shadowBlur = 0;
         
-        // The original glow line call that was attempting to connect the last and first point is removed, 
-        // as ctx.closePath() handles the connection, and ctx.stroke() applies the glowy stroke to the whole path.
+        // REMOVED: The complex, incorrect line that manually tried to draw the final segment. 
+        // ctx.closePath() handles it correctly before ctx.stroke().
     }
 
     /**
@@ -225,21 +224,36 @@ document.addEventListener('DOMContentLoaded', () => {
 
         // Draw Legend (bottom right)
         ctx.font = '12px "Space Mono", monospace';
-        let legendY = canvas.height - 80;
-        const legendX = canvas.width - 250;
+        
+        // **FIXED LEGEND POSITIONING**
+        const legendWidth = 220;
+        const legendHeight = 75; // Increased height slightly
+        const margin = 30; // Margin from the edge of the canvas
+        const padding = 15; // Padding inside the box
 
-        // Legend box background for contrast
-        ctx.fillStyle = 'rgba(10, 17, 40, 0.7)';
-        ctx.fillRect(legendX - 10, legendY - 10, 220, 70);
-        ctx.strokeStyle = 'rgba(14, 165, 233, 0.3)';
-        ctx.strokeRect(legendX - 10, legendY - 10, 220, 70);
+        const legendX = canvas.width - legendWidth - margin;
+        let legendY = canvas.height - legendHeight - margin + 5; // Start box Y slightly higher
+        let textY = legendY + padding; // Initial text Y
+
+        // Draw Legend box background for contrast
+        ctx.fillStyle = 'rgba(10, 17, 40, 0.9)'; // Darker, more opaque
+        ctx.fillRect(legendX, legendY, legendWidth, legendHeight);
+        ctx.strokeStyle = 'rgba(14, 165, 233, 0.6)'; // Stronger border
+        ctx.strokeRect(legendX, legendY, legendWidth, legendHeight);
 
         exoplanetData.forEach((planet) => {
+            const rowX = legendX + padding;
+            const rowY = textY + 5;
+            
+            // Draw color key
             ctx.fillStyle = planet.color.replace('0.7', '1.0');
-            ctx.fillRect(legendX, legendY, 15, 5); // Color key
+            ctx.fillRect(rowX, rowY - 5, 15, 5); 
+            
+            // Draw text
             ctx.fillStyle = 'var(--color-light-text)';
-            ctx.fillText(planet.name, legendX + 25, legendY + 5);
-            legendY += 20;
+            ctx.fillText(planet.name, rowX + 25, rowY);
+            
+            textY += 20;
         });
 
 
