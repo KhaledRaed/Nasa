@@ -1,0 +1,145 @@
+exploratory-analysis-section {
+    padding: 80px 20px;
+    background-color: var(--color-dark-space);
+    color: var(--color-light-text);
+    text-align: center;
+    position: relative;
+    overflow: hidden;
+}
+
+.exploratory-analysis-section .container {
+    max-width: 1200px;
+    margin: 0 auto;
+}
+
+.section-title {
+    margin-bottom: 60px;
+}
+
+.visualization-area {
+    height: 400px;
+    background: rgba(4, 41, 58, 0.901);
+    border: 1px solid rgba(14, 165, 233, 0.3);
+    border-radius: 12px;
+    margin-bottom: 60px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    font-size: 1.5rem;
+    color: var(--color-accent-blue);
+    position: relative;
+    overflow: hidden;
+    box-shadow: 0 0 40px rgba(14, 165, 233, 0.2);
+}
+
+.visualization-area::after {
+    content: "Interactive Data Visualization Placeholder";
+    position: absolute;
+    opacity: 0.6;
+}
+
+/* REMOVED the ::after placeholder content since the chart will render */
+.visualization-area::after {
+    content: "";
+    position: absolute;
+    opacity: 0;
+}
+
+/* Ensure the canvas fills the area */
+.visualization-area canvas {
+    display: block;
+    width: 100%;
+    height: 100%;
+}
+
+
+/* Analysis Grid for Key Findings */
+.analysis-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 30px;
+    text-align: left;
+}
+
+/* Individual Analysis Card */
+.analysis-card {
+    background-color: var(--color-navy);
+    /* Slightly lighter background than the section */
+    border: 2px solid var(--color-accent-purple);
+    border-radius: 12px;
+    padding: 30px;
+    transition: transform var(--transition-speed), border-color var(--transition-speed), box-shadow var(--transition-speed);
+    box-shadow: 0 5px 20px rgba(0, 0, 0, 0.5);
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+}
+
+.analysis-card:hover {
+    transform: translateY(-5px);
+    border-color: var(--color-accent-blue);
+    box-shadow: 0 15px 35px var(--shadow-hover);
+}
+
+.card-icon {
+    font-size: 2rem;
+    margin-bottom: 15px;
+    background: var(--gradient-cta);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
+    width: fit-content;
+}
+
+.analysis-card h4 {
+    font-size: 1.4rem;
+    font-weight: 600;
+    margin-bottom: 10px;
+    color: var(--color-accent-blue);
+    letter-spacing: 0.5px;
+}
+
+.analysis-card p {
+    font-size: 1rem;
+    font-weight: 300;
+    line-height: 1.6;
+    opacity: 0.9;
+}
+
+
+/* ------------------------------------------- */
+/* RESPONSIVENESS              */
+/* ------------------------------------------- */
+
+@media (max-width: 768px) {
+    .exploratory-analysis-section {
+        padding: 60px 15px;
+    }
+
+    .visualization-area {
+        height: 300px;
+        margin-bottom: 40px;
+    }
+
+    .analysis-grid {
+        grid-template-columns: 1fr;
+        /* Stack cards vertically on smaller screens */
+        gap: 25px;
+    }
+}
+
+@media (max-width: 480px) {
+    .visualization-area {
+        height: 200px;
+    }
+
+    .visualization-area::after {
+        font-size: 1rem;
+        padding: 10px;
+    }
+
+    .analysis-card {
+        padding: 25px;
+    }
+}
+

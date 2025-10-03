@@ -7,7 +7,6 @@
     <meta name="description" content="Exoquest-404!! - Explore exoplanets and classify them using AI technology">
     <title>Exoquest-404!! - Explore the Universe</title>
 
-    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
@@ -15,28 +14,24 @@
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-    <!-- Stylesheets -->
     <link rel="stylesheet" href="Css/styles.css">
     <link rel="stylesheet" href="Css/header.css">
     <link rel="stylesheet" href="Css/home.css">
     <link rel="stylesheet" href="Css/about.css">
     <link rel="stylesheet" href="Css/planets.css">
     <link rel="stylesheet" href="Css/team.css">
+    <link rel="stylesheet" href="Css/chart.css">
 </head>
 
 <body>
-    <!-- Loading Screen -->
     <div class="loading-screen">
         <div class="loader"></div>
     </div>
 
-    <!-- Scroll Progress Bar -->
     <div class="scroll-progress"></div>
 
-    <!-- Skip Link -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
-    <!-- Starfield Background -->
     <div class="stars-container" id="starsContainer">
         <div class="nebula"></div>
         <div class="nebula"></div>
@@ -44,7 +39,6 @@
         <div class="nebula"></div>
     </div>
 
-    <!-- Header -->
     <header id="mainHeader">
         <nav>
             <a href="#" class="logo" aria-label="Exoquest Home">
@@ -67,20 +61,18 @@
                 <li><a href="#home" class="active">Home</a></li>
                 <li><a href="#about-us">About Us</a></li>
                 <li><a href="#planets-section">Planets</a></li>
+                <li><a href="#exploratory-analysis-section">Analysis</a></li>
                 <li><a href="#team">Our Team</a></li>
                 <li><a href="./html/Identify.html" class="cta-button">Identify</a></li>
             </ul>
         </nav>
     </header>
 
-    <!-- Mission Status Banner -->
     <div class="mission-banner" id="missionBanner">
         <i class="fas fa-satellite"></i> Mission Status: Active
     </div>
 
-    <!-- Main Content -->
     <main id="main-content">
-        <!-- Home Section -->
         <section id="home">
             <div class="demo-content">
                 <h2>Welcome to Exoquest</h2>
@@ -96,7 +88,6 @@
             </div>
         </section>
 
-        <!-- About Us Section -->
         <section id="about-us">
             <div class="video-background" id="videoBackground">
                 <video class="video-fullscreen desktop-video" autoplay loop muted playsinline preload="auto">
@@ -118,7 +109,6 @@
                     identification.
                 </p>
 
-                <!-- Stats Container -->
                 <div class="stats-container">
                     <div class="stat-card">
                         <div class="stat-number" data-target="5000">0</div>
@@ -136,7 +126,6 @@
             </div>
         </section>
 
-        <!-- Planets Section -->
         <section id="planets-section" class="planets-section">
             <h2 class="section-title">Explore Exoplanets</h2>
             <p class="section-subtitle">A journey through the most fascinating worlds beyond our solar system</p>
@@ -167,7 +156,36 @@
             </div>
         </section>
 
-        <!-- Team Section -->
+        <section id="exploratory-analysis-section" class="exploratory-analysis-section">
+            <div class="container">
+                <h2 class="section-title">Comparative Exoplanet Analysis</h2>
+                <div class="visualization-area">
+                    <canvas id="exoplanet-chart"></canvas>
+                </div>
+
+                <div class="analysis-grid">
+                    <div class="analysis-card">
+                        <div class="card-icon"><i class="fas fa-satellite-dish"></i></div>
+                        <h4>Habitable Zone Candidates</h4>
+                        <p>Planets like TRAPPIST-1 e and Kepler-186 f show low Mass/Radius ratios and moderate
+                            temperatures, highlighting them as prime candidates for follow-up habitability studies.</p>
+                    </div>
+                    <div class="analysis-card">
+                        <div class="card-icon"><i class="fas fa-meteor"></i></div>
+                        <h4>The Ultra-Hots</h4>
+                        <p>WASP-12 b's profile reveals an extreme case: high mass, high radius, and a dangerously short
+                            orbital period, leading to its intense, tidally-locked temperature profile.</p>
+                    </div>
+                    <div class="analysis-card">
+                        <div class="card-icon"><i class="fas fa-ruler-combined"></i></div>
+                        <h4>Parameter Correlation</h4>
+                        <p>A noticeable inverse relationship exists between Orbital Period and Temperature, a classic
+                            finding for exoplanets: closer orbits lead to extremely high surface temperatures.</p>
+                    </div>
+                </div>
+            </div>
+        </section>
+
         <section id="team" class="team-section">
             <h2 class="section-title">Meet Our Mission Team</h2>
             <p class="section-subtitle">The brilliant minds driving the future of space exploration</p>
@@ -205,11 +223,11 @@
         </section>
     </main>
 
-    <!-- Scripts -->
     <script src="Js/main.js"></script>
     <script src="Js/header.js"></script>
     <script src="Js/about.js"></script>
     <script src="Js/planets.js"></script>
+    <script src="Js/chart.js"></script>
 </body>
 
 </html>
