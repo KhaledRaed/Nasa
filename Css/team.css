@@ -8,16 +8,20 @@
 }
 
 .section-title {
-    font-size: 3rem;
-    font-weight: 700;
+    font-size: 4rem;
+    font-weight: 800;
     margin-bottom: 0.5rem;
     color: var(--color-light-text);
     text-shadow: 0 0 15px rgba(14, 165, 233, 0.4);
     animation: fadeInUp 0.8s ease-out both;
+    background: linear-gradient(135deg, #0ea5e9, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .section-subtitle {
-    font-size: 1.25rem;
+    font-size: 1.3rem;
     color: rgba(232, 237, 245, 0.8);
     margin-bottom: 3rem;
     animation: fadeInUp 0.8s ease-out 0.2s both;
@@ -49,41 +53,165 @@
 }
 
 .team-member {
-    background: rgba(10, 14, 26, 0.7);
-    border: 1px solid rgba(14, 165, 233, 0.1);
+    background: linear-gradient(135deg, rgba(10, 14, 26, 0.8), rgba(15, 23, 42, 0.9));
+    border: 1px solid rgba(14, 165, 233, 0.2);
     backdrop-filter: blur(10px);
-    border-radius: 12px;
-    padding: 2rem;
+    border-radius: 16px;
+    padding: 2.5rem;
     box-shadow: 0 10px 30px rgba(0, 0, 0, 0.5);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    transition: all 0.4s cubic-bezier(0.4, 0, 0.2, 1);
     animation: fadeInScale 0.8s ease-out both;
+    position: relative;
+    overflow: hidden;
 }
 
+.team-member::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(135deg, rgba(14, 165, 233, 0.1), rgba(168, 85, 247, 0.1));
+    opacity: 0;
+    transition: opacity 0.4s ease;
+    z-index: 0;
+}
+
+.team-member:hover::before {
+    opacity: 1;
+}
 
 .team-member:hover {
-    transform: translateY(-5px) scale(1.02);
-    box-shadow: 0 15px 40px rgba(14, 165, 233, 0.3);
-    border-color: rgba(14, 165, 233, 0.4);
+    transform: translateY(-10px) scale(1.03);
+    box-shadow: 0 20px 50px rgba(14, 165, 233, 0.4);
+    border-color: rgba(168, 85, 247, 0.5);
 }
 
 .team-member:hover .member-photo {
-    transform: scale(1.05);
-    box-shadow: 0 0 15px rgba(14, 165, 233, 0.5);
+    transform: scale(1.08) rotate(2deg);
+    box-shadow: 0 0 30px rgba(168, 85, 247, 0.6);
 }
 
 .team-row-2 .team-member {
-
     flex: 1 1 300px;
-    max-width: 350px;
+    max-width: 380px;
 }
 
 .member-photo {
     width: 180px;
     height: 180px;
-    border-radius: 8px;
+    border-radius: 12px;
     object-fit: cover;
     margin-bottom: 1.5rem;
-    border: 2px solid var(--color-accent-blue);
-    box-shadow: 0 0 10px rgba(14, 165, 233, 0.3);
-    transition: transform 0.3s ease, box-shadow 0.3s ease;
+    border: 3px solid transparent;
+    background: linear-gradient(135deg, #0ea5e9, #a855f7);
+    background-clip: padding-box;
+    box-shadow: 0 0 20px rgba(14, 165, 233, 0.4);
+    transition: all 0.4s ease;
+    position: relative;
+    z-index: 1;
+}
+
+.team-member h3 {
+    font-size: 1.4rem;
+    color: var(--color-light-text);
+    margin: 1rem 0 0.5rem;
+    position: relative;
+    z-index: 1;
+}
+
+.member-title {
+    font-size: 1rem;
+    color: rgba(232, 237, 245, 0.7);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+    position: relative;
+    z-index: 1;
+}
+
+@media (max-width: 1024px) {
+    .team-row {
+        grid-template-columns: repeat(2, 1fr);
+    }
+
+    .team-row-2 {
+        gap: 2rem;
+    }
+
+    .team-row-2 .team-member {
+        flex: 0 0 calc(50% - 1rem);
+    }
+
+    .section-title {
+        font-size: 3rem;
+    }
+}
+
+@media (max-width: 768px) {
+    .team-section {
+        padding: 60px 1.5rem;
+    }
+
+    .section-title {
+        font-size: 2.5rem;
+        margin-bottom: 1rem;
+    }
+
+    .section-subtitle {
+        font-size: 1.1rem;
+        margin-bottom: 2rem;
+    }
+
+    .team-grid {
+        gap: 2rem;
+    }
+
+    .team-row,
+    .team-row-2 {
+        display: grid;
+        grid-template-columns: 1fr;
+        gap: 2rem;
+    }
+
+    .team-row-2 .team-member {
+        flex: 1 1 100%;
+        max-width: none;
+    }
+
+    .team-member {
+        padding: 2rem;
+    }
+
+    .member-photo {
+        width: 160px;
+        height: 160px;
+    }
+
+    .team-member h3 {
+        font-size: 1.3rem;
+    }
+
+    .member-title {
+        font-size: 0.95rem;
+    }
+}
+
+@media (max-width: 480px) {
+    .section-title {
+        font-size: 2rem;
+    }
+
+    .team-member {
+        padding: 1.5rem;
+    }
+
+    .member-photo {
+        width: 140px;
+        height: 140px;
+    }
+
+    .team-member h3 {
+        font-size: 1.2rem;
+    }
 }

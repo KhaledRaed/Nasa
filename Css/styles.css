@@ -1,26 +1,38 @@
-#header-section {
-    position: relative;
-    z-index: 1000;
-    width: 100%;
-    background: transparent;
+:root {
+    --color-dark-space: #000000;
+    --color-navy: #0a1128;
+    --color-light-text: #e8edf5;
+    --color-accent-blue: #0ea5e9;
+    --color-accent-purple: #a855f7;
+    --color-accent-red: #dc2626;
+    --gradient-cta: linear-gradient(135deg, #0ea5e9 0%, #a855f7 100%);
+    --gradient-header: linear-gradient(180deg, rgba(10, 14, 26, 0.9) 0%, rgba(10, 14, 26, 0.7) 100%);
+    --shadow-primary: rgba(14, 165, 233, 0.25);
+    --shadow-hover: rgba(14, 165, 233, 0.5);
+    --transition-speed: 0.3s;
 }
 
-.skip-link {
-    position: absolute;
-    top: -40px;
-    left: 0;
-    background: var(--color-accent-blue);
-    color: white;
-    padding: 8px;
-    z-index: 100;
-    transition: top 0.3s ease;
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
-.skip-link:focus {
-    top: 0;
+html {
+    scroll-behavior: smooth;
 }
 
-/* Starfield */
+body {
+    font-family: "MuseoModerno", sans-serif;
+    font-optical-sizing: auto;
+    font-weight: 200;
+    font-style: normal;
+    background: var(--color-dark-space);
+    color: var(--color-light-text);
+    overflow-x: hidden;
+    line-height: 1.6;
+}
+
 .stars-container {
     position: fixed;
     top: 0;
@@ -162,4 +174,62 @@
     66% {
         transform: translate(-20px, 20px) scale(0.9);
     }
+}
+
+.skip-link {
+    position: absolute;
+    top: -40px;
+    left: 0;
+    background: var(--color-accent-blue);
+    color: white;
+    padding: 8px;
+    z-index: 10000;
+    transition: top 0.3s ease;
+}
+
+.skip-link:focus {
+    top: 0;
+}
+
+.scroll-progress {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 0%;
+    height: 3px;
+    background: linear-gradient(90deg, #0ea5e9, #a855f7);
+    z-index: 10001;
+    transition: width 0.1s ease;
+}
+
+.loading-screen {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    background: #000;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    z-index: 10002;
+    transition: opacity 0.5s ease, visibility 0.5s ease;
+}
+
+.loading-screen.hidden {
+    opacity: 0;
+    visibility: hidden;
+}
+
+.loader {
+    width: 60px;
+    height: 60px;
+    border: 4px solid rgba(14, 165, 233, 0.2);
+    border-top-color: #0ea5e9;
+    border-radius: 50%;
+    animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+    to { transform: rotate(360deg); }
 }

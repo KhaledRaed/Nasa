@@ -4,125 +4,106 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Exoquest-404!!</title>
-    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;600;700&display=swap" rel="stylesheet">
+    <meta name="description" content="Exoquest-404!! - Explore exoplanets and classify them using AI technology">
+    <title>Exoquest-404!! - Explore the Universe</title>
+
+    <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&display=swap"
+    <link
+        href="https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
         rel="stylesheet">
-    <link rel="preconnect" href="https://fonts.googleapis.com">
-    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-    <link href="https://fonts.googleapis.com/css2?family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
-        rel="stylesheet">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
 
-
-    <link rel="stylesheet" href="Css/stars.css">
+    <!-- Stylesheets -->
+    <link rel="stylesheet" href="Css/styles.css">
     <link rel="stylesheet" href="Css/header.css">
     <link rel="stylesheet" href="Css/home.css">
-    <link rel="stylesheet" href="./Css/about.css">
+    <link rel="stylesheet" href="Css/about.css">
     <link rel="stylesheet" href="Css/planets.css">
     <link rel="stylesheet" href="Css/team.css">
-    <link rel="stylesheet" href="Css/responsive.css">
-    <style>
-        :root {
-            --color-dark-space: #000000;
-            --color-navy: #0a1128;
-            --color-light-text: #e8edf5;
-            --color-accent-blue: #0ea5e9;
-            --color-accent-red: #dc2626;
-            --gradient-cta: linear-gradient(135deg, #0ea5e9 0%, #0f76d4 100%);
-            --gradient-header: linear-gradient(180deg, rgba(10, 14, 26, 0.9) 0%, rgba(10, 14, 26, 0.7) 100%);
-            --shadow-primary: rgba(14, 165, 233, 0.25);
-            --shadow-hover: rgba(14, 165, 233, 0.5);
-            --transition-speed: 0.3s;
-        }
-
-        * {
-            margin: 0;
-            padding: 0;
-            box-sizing: border-box;
-        }
-
-        body {
-            font-family: "MuseoModerno", sans-serif;
-            font-optical-sizing: auto;
-            font-weight: 200;
-            font-style: normal;
-            background: var(--color-dark-space);
-            color: var(--color-light-text);
-            overflow-x: hidden;
-            line-height: 1.6;
-        }
-    </style>
 </head>
 
 <body>
+    <!-- Loading Screen -->
+    <div class="loading-screen">
+        <div class="loader"></div>
+    </div>
+
+    <!-- Scroll Progress Bar -->
+    <div class="scroll-progress"></div>
+
+    <!-- Skip Link -->
     <a href="#main-content" class="skip-link">Skip to main content</a>
 
+    <!-- Starfield Background -->
     <div class="stars-container" id="starsContainer">
         <div class="nebula"></div>
         <div class="nebula"></div>
         <div class="nebula"></div>
+        <div class="nebula"></div>
     </div>
 
-    <section id="header-section">
-        <header id="mainHeader">
-            <nav>
-                <a href="#" class="logo" aria-label="Exoquest Home">
-                    <div class="logo-icon-container">
-                        <img src="./media/logo.png" alt="Exoquest Logo Icon" class="logo-icon">
-                    </div>
-                    <svg class="logo-text-svg" viewBox="0 0 200 50" aria-hidden="true">
-                        <text x="20" y="25" class="logo-title">Exoquest</text>
-                        <text x="20" y="45" class="logo-subtitle">404!!</text>
-                    </svg>
-                </a>
+    <!-- Header -->
+    <header id="mainHeader">
+        <nav>
+            <a href="#" class="logo" aria-label="Exoquest Home">
+                <div class="logo-icon-container">
+                    <img src="./media/logo.png" alt="Exoquest Logo Icon" class="logo-icon">
+                </div>
+                <svg class="logo-text-svg" viewBox="0 0 200 50" aria-hidden="true">
+                    <text x="20" y="25" class="logo-title">Exoquest</text>
+                    <text x="20" y="45" class="logo-subtitle">404!!</text>
+                </svg>
+            </a>
 
-                <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
-                    <span></span>
-                    <span></span>
-                    <span></span>
-                </button>
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
 
-                <ul class="nav-menu" id="navMenu">
-                    <li><a href="#home" class="active">Home</a></li>
-                    <li><a href="#about-us">About Us</a></li>
-                    <li><a href="#planets-section">Planets</a></li>
-                    <li><a href="#team">Our Team</a></li>
-                    <li><a href="./html/Identify.html" class="cta-button">Identify</a></li>
-                </ul>
-            </nav>
-        </header>
-    </section>
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="#home" class="active">Home</a></li>
+                <li><a href="#about-us">About Us</a></li>
+                <li><a href="#planets-section">Planets</a></li>
+                <li><a href="#team">Our Team</a></li>
+                <li><a href="./html/Identify.html" class="cta-button">Identify</a></li>
+            </ul>
+        </nav>
+    </header>
 
+    <!-- Mission Status Banner -->
     <div class="mission-banner" id="missionBanner">
         <i class="fas fa-satellite"></i> Mission Status: Active
     </div>
 
+    <!-- Main Content -->
     <main id="main-content">
+        <!-- Home Section -->
         <section id="home">
             <div class="demo-content">
                 <h2>Welcome to Exoquest</h2>
                 <p>
-                    Discover the wonders of the universe with NASA. From distant galaxies to the planets in our solar
-                    system,
-                    we're pushing the boundaries of human knowledge and exploring the final frontier.
+                    Discover the wonders of the universe with cutting-edge AI technology. From distant galaxies to the
+                    planets in our solar system, we're pushing the boundaries of human knowledge and exploring the final
+                    frontier.
                 </p>
-
+            </div>
+            <div class="scroll-indicator">
+                <span>Scroll Down</span>
+                <i class="fas fa-chevron-down"></i>
             </div>
         </section>
 
+        <!-- About Us Section -->
         <section id="about-us">
             <div class="video-background" id="videoBackground">
-                <video class="video-fullscreen desktop-video" autoplay loop muted playsinline preload="auto"
-                    fetchpriority="high">
+                <video class="video-fullscreen desktop-video" autoplay loop muted playsinline preload="auto">
                     <source src="./media/mars.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
-
-                <video class="video-fullscreen mobile-video" autoplay loop muted playsinline preload="auto"
-                    fetchpriority="high">
+                <video class="video-fullscreen mobile-video" autoplay loop muted playsinline preload="auto">
                     <source src="./media/mars.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
@@ -132,19 +113,33 @@
                 <h2>About Us</h2>
                 <p>
                     We are a team of Data Analysts, AI enthusiasts, and Web Developers from the University of Jordan,
-                    brought together by our interest in discovery and technology.
-
-                    Our goal is to use machine learning and AI to make sense of large astronomical datasets. With skills
-                    in data analysis, AI model building, and web development, we work together to solve the challenge of
-                    exoplanet identification.
+                    brought together by our passion for discovery and technology. Our goal is to use machine learning
+                    and AI to make sense of large astronomical datasets and solve the challenge of exoplanet
+                    identification.
                 </p>
 
+                <!-- Stats Container -->
+                <div class="stats-container">
+                    <div class="stat-card">
+                        <div class="stat-number" data-target="5000">0</div>
+                        <div class="stat-label">Exoplanets Analyzed</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" data-target="95">0</div>
+                        <div class="stat-label">Accuracy Rate %</div>
+                    </div>
+                    <div class="stat-card">
+                        <div class="stat-number" data-target="5">0</div>
+                        <div class="stat-label">Team Members</div>
+                    </div>
+                </div>
             </div>
         </section>
 
+        <!-- Planets Section -->
         <section id="planets-section" class="planets-section">
             <h2 class="section-title">Explore Exoplanets</h2>
-            <p class="section-subtitle">A brief look at some of the most fascinating worlds.</p>
+            <p class="section-subtitle">A journey through the most fascinating worlds beyond our solar system</p>
 
             <div class="planets-container">
                 <div class="planet-list-column">
@@ -159,13 +154,12 @@
 
                 <div class="planet-details-column">
                     <div id="planet-details-card" class="planet-details-card">
-                        <h3 id="planet-title">Select a Planet from the list</h3>
+                        <h3 id="planet-title">Select a Planet</h3>
                         <div class="planet-images">
-                            <img id="image-primary" src="" alt="Primary image of selected planet"
-                                class="planet-image primary-image">
+                            <img id="image-primary" src="" alt="Primary image of selected planet" class="planet-image">
                         </div>
-                        <p id="planet-description">Click on a planet name in the list to the left to view its details,
-                            images, and a short article.</p>
+                        <p id="planet-description">Click on a planet name in the list to view its details, images, and a
+                            short article.</p>
                         <a id="read-more-link" href="#" target="_blank" class="cta-button read-more-button"
                             style="display:none;">Read More</a>
                     </div>
@@ -173,35 +167,36 @@
             </div>
         </section>
 
+        <!-- Team Section -->
         <section id="team" class="team-section">
             <h2 class="section-title">Meet Our Mission Team</h2>
-            <p class="section-subtitle">The brilliant minds driving the future of space exploration.</p>
+            <p class="section-subtitle">The brilliant minds driving the future of space exploration</p>
             <div class="team-grid">
                 <div class="team-row">
                     <div class="team-member">
-                        <img src="./media/Qusai Abu Ghannam.jpeg" alt="" class="member-photo">
+                        <img src="./media/Qusai Abu Ghannam.jpeg" alt="Qusai Abu-Ghannam" class="member-photo">
                         <h3>Qusai Abu-Ghannam</h3>
                         <p class="member-title">AI Developer</p>
                     </div>
                     <div class="team-member">
-                        <img src="./media/Mohammad Ghabboun.jpg" alt="" class="member-photo">
+                        <img src="./media/Mohammad Ghabboun.jpg" alt="Mohammad Ghabboun" class="member-photo">
                         <h3>Mohammad Ghabboun</h3>
-                        <p class="member-title">Data analyst</p>
+                        <p class="member-title">Data Analyst</p>
                     </div>
                     <div class="team-member">
-                        <img src="./media/khaled raed.jpg" alt="" class="member-photo">
+                        <img src="./media/khaled raed.jpg" alt="Khaled Raed" class="member-photo">
                         <h3>Khaled Raed</h3>
                         <p class="member-title">Front-End Developer</p>
                     </div>
                 </div>
                 <div class="team-row-2">
                     <div class="team-member">
-                        <img src="./media/ALBARA SAMER .JPG" alt="" class="member-photo">
+                        <img src="./media/ALBARA SAMER .JPG" alt="Albara Samer" class="member-photo">
                         <h3>Albara Samer</h3>
                         <p class="member-title">AI Developer</p>
                     </div>
                     <div class="team-member">
-                        <img src="./media/Omar Aldamiri.jpg" alt="" class="member-photo">
+                        <img src="./media/Omar Aldamiri.jpg" alt="Omar Al-Damiri" class="member-photo">
                         <h3>Omar Al-Damiri</h3>
                         <p class="member-title">Back-End Developer</p>
                     </div>
@@ -210,15 +205,11 @@
         </section>
     </main>
 
-
-
-    <script src="Js/stars.js"></script>
+    <!-- Scripts -->
+    <script src="Js/main.js"></script>
     <script src="Js/header.js"></script>
     <script src="Js/about.js"></script>
     <script src="Js/planets.js"></script>
-    <script src="Js/responsive.js"></script>
-
-
 </body>
 
 </html>

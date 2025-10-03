@@ -24,7 +24,7 @@ header {
 }
 
 header.scrolled {
-    background: rgba(5, 7, 20, 0.95);
+    background: rgba(5, 7, 20, 0.98);
     backdrop-filter: blur(24px);
     border-bottom: 1px solid rgba(14, 165, 233, 0.2);
     box-shadow: 0 8px 32px rgba(0, 0, 0, 0.4);
@@ -62,7 +62,7 @@ nav {
 }
 
 .logo:hover {
-    transform: scale(1.02);
+    transform: scale(1.05);
 }
 
 .logo-icon-container {
@@ -145,6 +145,10 @@ nav {
 
 .nav-menu li:nth-child(4) {
     animation-delay: 0.7s;
+}
+
+.nav-menu li:nth-child(5) {
+    animation-delay: 0.8s;
 }
 
 @keyframes fadeInUp {
@@ -232,8 +236,7 @@ nav {
 
 .cta-button:hover {
     transform: translateY(-3px) scale(1.05) !important;
-    box-shadow: 0 8px 30px rgba(14, 165, 233, 0.5) !important;
-    background: linear-gradient(135deg, #0f76d4 0%, #0ea5e9 100%) !important;
+    box-shadow: 0 8px 30px rgba(168, 85, 247, 0.5) !important;
 }
 
 .menu-toggle {
@@ -256,7 +259,6 @@ nav {
     transition: all 0.3s ease;
 }
 
-/* Updated style to keep the accent color when active */
 .menu-toggle:hover span,
 .menu-toggle.active span {
     background: var(--color-accent-blue);
@@ -272,5 +274,143 @@ nav {
 
 .menu-toggle.active span:nth-child(3) {
     transform: translateY(-8.5px) rotate(-45deg);
+}
 
+@media (max-width: 768px) {
+    nav {
+        padding: 1rem 1.5rem;
+    }
+
+    .menu-toggle {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+    }
+
+    .nav-menu {
+        position: fixed;
+        top: 0;
+        left: 0;
+        right: 0;
+        height: 100vh;
+        flex-direction: column;
+        background: rgba(0, 0, 0, 0.98);
+        backdrop-filter: blur(20px);
+        padding: 0;
+        gap: 0.5rem;
+        justify-content: center;
+        align-items: center;
+        transform: translateX(100%);
+        opacity: 0;
+        visibility: hidden;
+        pointer-events: none;
+        transition: transform 0.4s cubic-bezier(0.645, 0.045, 0.355, 1),
+            opacity 0.4s ease,
+            visibility 0.4s;
+        z-index: 1001;
+    }
+
+    .nav-menu.active {
+        transform: translateX(0);
+        opacity: 1;
+        visibility: visible;
+        pointer-events: auto;
+    }
+
+    .nav-menu li {
+        width: auto;
+        text-align: center;
+        opacity: 0;
+        transform: translateY(20px);
+        animation: none;
+    }
+
+    .nav-menu.active li {
+        opacity: 1;
+        transform: translateY(0);
+        animation: slideInMenu 0.4s ease-out forwards;
+    }
+
+    .nav-menu.active li:nth-child(1) {
+        animation-delay: 0.1s;
+    }
+
+    .nav-menu.active li:nth-child(2) {
+        animation-delay: 0.2s;
+    }
+
+    .nav-menu.active li:nth-child(3) {
+        animation-delay: 0.3s;
+    }
+
+    .nav-menu.active li:nth-child(4) {
+        animation-delay: 0.4s;
+    }
+
+    .nav-menu.active li:nth-child(5) {
+        animation-delay: 0.5s;
+    }
+
+    @keyframes slideInMenu {
+        from {
+            opacity: 0;
+            transform: translateY(20px);
+        }
+
+        to {
+            opacity: 1;
+            transform: translateY(0);
+        }
+    }
+
+    .nav-menu li a {
+        display: block;
+        text-align: center;
+        padding: 1.5rem 3rem;
+        font-size: 1.5rem;
+        border-bottom: none;
+    }
+
+    .nav-menu li a::before {
+        display: none;
+    }
+
+    .cta-button {
+        margin-top: 1rem;
+        border: 2px solid var(--color-accent-blue) !important;
+        transform: none !important;
+    }
+
+    .cta-button:hover {
+        transform: scale(1.05) !important;
+    }
+
+    .logo-icon-container {
+        width: 50px;
+        height: 50px;
+    }
+
+    .logo-text-svg {
+        height: 35px;
+    }
+}
+
+@media (max-width: 480px) {
+    nav {
+        padding: 0.75rem 1rem;
+    }
+
+    .logo-icon-container {
+        width: 45px;
+        height: 45px;
+    }
+
+    .logo-text-svg {
+        height: 30px;
+    }
+
+    .nav-menu li a {
+        font-size: 1.25rem;
+        padding: 1.25rem 2rem;
+    }
 }

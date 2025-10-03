@@ -9,29 +9,22 @@
     transition: all 0.6s ease-in-out;
 }
 
-.planets-section::before {
-    content: '';
-    position: absolute;
-    top: 0;
-    left: 0;
-    width: 100%;
-    height: 100%;
-    z-index: -1;
-    pointer-events: none;
-}
-
 .planets-section .section-title {
-    font-size: 3.5rem;
+    font-size: 4rem;
     font-weight: 800;
     color: var(--color-light-text);
     margin-bottom: 1rem;
-    text-shadow: 0 4px 20px rgba(14, 165, 233, 0.3);
-    letter-spacing: 1px;
+    text-shadow: 0 4px 20px rgba(14, 165, 233, 0.4);
+    letter-spacing: 2px;
+    background: linear-gradient(135deg, #0ea5e9, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .planets-section .section-subtitle {
-    font-size: 1.2rem;
-    color: rgba(232, 237, 245, 0.7);
+    font-size: 1.3rem;
+    color: rgba(232, 237, 245, 0.8);
     margin-bottom: 60px;
     font-weight: 300;
 }
@@ -45,7 +38,6 @@
     padding: 0 20px;
 }
 
-/* Planet List Styling */
 .planet-list-column {
     flex: 1;
     min-width: 280px;
@@ -57,8 +49,8 @@
     padding: 0;
     margin: 0;
     background: linear-gradient(135deg,
-            rgba(10, 17, 40, 0.8) 0%,
-            rgba(15, 23, 42, 0.9) 100%);
+            rgba(10, 17, 40, 0.85) 0%,
+            rgba(15, 23, 42, 0.95) 100%);
     border-radius: 16px;
     padding: 20px;
     border: 1px solid rgba(14, 165, 233, 0.3);
@@ -107,8 +99,8 @@
     width: 0;
     height: 100%;
     background: linear-gradient(90deg,
-            rgba(14, 165, 233, 0.1) 0%,
-            rgba(14, 165, 233, 0.05) 100%);
+            rgba(14, 165, 233, 0.15) 0%,
+            rgba(168, 85, 247, 0.1) 100%);
     transition: width 0.3s ease;
     z-index: -1;
 }
@@ -122,26 +114,25 @@
     transform: translateX(8px) scale(1.02);
     color: var(--color-accent-blue);
     border-left-color: var(--color-accent-blue);
-    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.2);
+    box-shadow: 0 4px 12px rgba(14, 165, 233, 0.3);
 }
 
 .planet-item.active {
     background: linear-gradient(90deg,
             rgba(14, 165, 233, 0.25) 0%,
-            rgba(14, 165, 233, 0.15) 100%);
-    border-left-color: var(--color-accent-blue);
+            rgba(168, 85, 247, 0.15) 100%);
+    border-left-color: var(--color-accent-purple);
     color: white;
-    box-shadow: 0 4px 16px rgba(14, 165, 233, 0.3);
+    box-shadow: 0 4px 16px rgba(168, 85, 247, 0.4);
 }
 
-/* Planet Details Styling */
 .planet-details-column {
     flex: 2.5;
 }
 
 .planet-details-card {
     background: linear-gradient(135deg,
-            rgba(10, 17, 40, 0.85) 0%,
+            rgba(10, 17, 40, 0.9) 0%,
             rgba(15, 23, 42, 0.95) 100%);
     border-radius: 20px;
     padding: 40px;
@@ -155,12 +146,15 @@
 .planet-details-card h3 {
     color: var(--color-accent-blue);
     margin-bottom: 30px;
-    font-size: 2.2em;
+    font-size: 2.5em;
     text-align: center;
-    text-shadow: 0 2px 10px rgba(14, 165, 233, 0.3);
+    text-shadow: 0 2px 10px rgba(14, 165, 233, 0.4);
     font-family: "Space Mono", monospace;
-    font-weight: 400;
-    font-style: normal;
+    font-weight: 700;
+    background: linear-gradient(135deg, #0ea5e9, #a855f7);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    background-clip: text;
 }
 
 .planet-images {
@@ -192,10 +186,10 @@
 
 .planet-details-card p {
     font-family: "Space Mono", monospace;
-    font-size: 1.1em;
-    color: rgba(232, 237, 245, 0.9);
+    font-size: 1.15em;
+    color: rgba(232, 237, 245, 0.95);
     margin-bottom: 25px;
-    line-height: 1.8;
+    line-height: 1.9;
     text-align: justify;
     padding: 0 10px;
 }
@@ -203,17 +197,114 @@
 .read-more-button {
     display: inline-block !important;
     margin-top: 20px;
-    padding: 12px 32px;
+    padding: 14px 36px;
     background: var(--gradient-cta);
     color: white;
     text-decoration: none;
     border-radius: 8px;
     font-weight: 600;
     transition: all 0.3s ease;
-    box-shadow: 0 4px 15px var(--shadow-primary);
+    box-shadow: 0 4px 15px rgba(168, 85, 247, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.read-more-button::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.read-more-button:hover::before {
+    left: 100%;
 }
 
 .read-more-button:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 20px var(--shadow-hover);
+    transform: translateY(-3px) scale(1.05);
+    box-shadow: 0 6px 25px rgba(168, 85, 247, 0.5);
+}
+
+@media (max-width: 900px) {
+    .planets-section .section-title {
+        font-size: 2.5rem;
+    }
+
+    .planets-section .section-subtitle {
+        font-size: 1.1rem;
+    }
+
+    .planets-container {
+        flex-direction: column;
+    }
+
+    .planet-list-column {
+        min-width: 100%;
+        max-width: 100%;
+    }
+
+    #planet-list {
+        display: flex;
+        flex-wrap: wrap;
+        justify-content: center;
+        padding: 15px;
+        position: static;
+    }
+
+    .planet-item {
+        flex: 1 1 calc(50% - 10px);
+        margin: 5px;
+        text-align: center;
+        border-left: none;
+        border-bottom: 3px solid transparent;
+        min-width: 140px;
+    }
+
+    .planet-item.active {
+        border-left-color: transparent;
+        border-bottom-color: var(--color-accent-purple);
+    }
+
+    .planet-details-column {
+        margin-top: 20px;
+    }
+
+    .planet-details-card {
+        padding: 30px 20px;
+    }
+
+    .planet-details-card h3 {
+        font-size: 1.8em;
+    }
+
+    .planet-images {
+        padding: 15px;
+    }
+
+    .planet-image {
+        width: 100%;
+    }
+}
+
+@media (max-width: 480px) {
+    .planets-section .section-title {
+        font-size: 2rem;
+    }
+
+    .planet-item {
+        flex: 1 1 100%;
+        font-size: 1rem;
+    }
+
+    .planet-details-card h3 {
+        font-size: 1.5em;
+    }
+
+    .planet-details-card p {
+        font-size: 1rem;
+    }
 }

@@ -1,26 +1,27 @@
-// Videovisibility control with precise section detection
+// Video visibility control with precise section detection
 const aboutSection = document.getElementById('about-us');
 const videoBackground = document.getElementById('videoBackground');
 const starsContainerElement = document.querySelector('.stars-container');
 const homeSection = document.getElementById('home');
 const teamSection = document.getElementById('team');
-const planetsSection = document.getElementById('planets-section'); // NEW: Get planets section
+const planetsSection = document.getElementById('planets-section');
 let isScrolling = false;
 
 function checkSectionInView() {
+    if (!aboutSection || !videoBackground || !starsContainerElement) return;
+
     const scrollPosition = window.scrollY + window.innerHeight / 2;
     const aboutTop = aboutSection.offsetTop;
     const aboutBottom = aboutTop + aboutSection.offsetHeight;
-    const homeTop = homeSection.offsetTop;
-    const homeBottom = homeTop + homeSection.offsetHeight;
-    const teamTop = teamSection.offsetTop;
-    const teamBottom = teamTop + teamSection.offsetHeight;
-    const planetsTop = planetsSection.offsetTop; // NEW: Planets Top
-    const planetsBottom = planetsTop + planetsSection.offsetHeight; // NEW: Planets Bottom
+    const homeTop = homeSection ? homeSection.offsetTop : 0;
+    const homeBottom = homeSection ? homeTop + homeSection.offsetHeight : 0;
+    const teamTop = teamSection ? teamSection.offsetTop : 0;
+    const teamBottom = teamSection ? teamTop + teamSection.offsetHeight : 0;
+    const planetsTop = planetsSection ? planetsSection.offsetTop : 0;
+    const planetsBottom = planetsSection ? planetsTop + planetsSection.offsetHeight : 0;
 
     // Check if we're in the About Us section (Hide stars)
     if (scrollPosition >= aboutTop && scrollPosition <= aboutBottom) {
-        // Show video and hide stars
         videoBackground.classList.add('visible');
         aboutSection.classList.add('visible');
         starsContainerElement.style.opacity = '0';
@@ -29,9 +30,8 @@ function checkSectionInView() {
     else if (
         (scrollPosition >= homeTop && scrollPosition <= homeBottom) ||
         (scrollPosition >= teamTop && scrollPosition <= teamBottom) ||
-        (scrollPosition >= planetsTop && scrollPosition <= planetsBottom) // NEW: Include Planets Section
+        (scrollPosition >= planetsTop && scrollPosition <= planetsBottom)
     ) {
-        // Hide video and show stars
         videoBackground.classList.remove('visible');
         aboutSection.classList.remove('visible');
         starsContainerElement.style.opacity = '1';
@@ -52,3 +52,38 @@ function throttledScrollHandler() {
 window.addEventListener('scroll', throttledScrollHandler);
 window.addEventListener('load', checkSectionInView);
 window.addEventListener('resize', checkSectionInView);
+
+// Animated Counter for Stats
+function animateCounter(element, target, duration = 2000) {
+    const start = 0;
+    const increment = target / (duration / 16);
+    let current = start;
+
+    const timer = setInterval(() => {
+        current += increment;
+        if (current >= target) {
+            element.textContent = Math.ceil(target);
+            clearInterval(timer);
+        } else {
+            element.textContent = Math.ceil(current);
+        }
+    }, 16);
+}
+
+// Observe stats section and trigger animation
+const statsObserver = new IntersectionObserver((entries) => {
+    entries.forEach(entry => {
+        if (entry.isIntersecting) {
+            const statNumber = entry.target.querySelector('.stat-number');
+            if (statNumber && !statNumber.classList.contains('animated')) {
+                const target = parseInt(statNumber.getAttribute('data-target'));
+                animateCounter(statNumber, target);
+                statNumber.classList.add('animated');
+            }
+        }
+    });
+}, { threshold: 0.5 });
+
+document.querySelectorAll('.stat-card').forEach(card => {
+    statsObserver.observe(card);
+});
