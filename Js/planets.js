@@ -3,7 +3,7 @@ document.addEventListener('DOMContentLoaded', () => {
         'Kepler-186f': {
             title: 'Kepler-186f: Earth\'s Cousin',
             article: 'Kepler-186f is the first Earth-size planet orbiting a star in the habitable zone. Discovered by NASA\'s Kepler Space Telescope, this world orbits an M dwarf star and receives about a third of the energy from its star that Earth receives from the Sun. It gives us hope that life-supporting worlds are common in the galaxy.',
-            image1: './media/HR_8799_chart.jpg',
+            image1: './media/kipler.png',
             readMore: 'https://www.nasa.gov/general/kepler-186f/'
         },
         'TRAPPIST-1e': {
