@@ -2,105 +2,158 @@ const manualForm = document.getElementById('manualIdentifyForm');
 const csvForm = document.getElementById('csvIdentifyForm');
 const outputDiv = document.getElementById('identificationOutput');
 const resultText = document.getElementById('result-text');
+const fileInput = document.getElementById('csv-file');
 
-// 1. Base URL for your API endpoint
-const API_URL = 'YOUR_BACKEND_API_ENDPOINT_HERE';
+// Set your FastAPI backend URLs
+const API_URL = 'http://127.0.0.1:8000/predict';
+const CSV_API_URL = 'http://127.0.0.1:8000/predict-csv';
 
-// Function to display the result
+// Add file input change listener to show selected file
+fileInput.addEventListener('change', function (e) {
+    const fileName = e.target.files[0]?.name;
+    // Get the visible label element for the file input
+    const fileLabel = document.querySelector('label[for="csv-file"]');
+    
+    // Check if a file was selected AND if the label was found
+    if (fileName && fileLabel) {
+        // Find or create a display element for the filename
+        let fileNameDisplay = document.getElementById('file-name-display');
+        if (!fileNameDisplay) {
+            fileNameDisplay = document.createElement('p');
+            fileNameDisplay.id = 'file-name-display';
+            fileNameDisplay.style.marginTop = '10px';
+            fileNameDisplay.style.color = 'var(--color-accent-blue)';
+            fileNameDisplay.style.fontSize = '0.9rem';
+
+            // *** NEW FIX IMPLEMENTED HERE: Insert the element immediately after the visible label ***
+            fileLabel.insertAdjacentElement("afterend", fileNameDisplay);
+        }
+        fileNameDisplay.textContent = `Selected file: ${fileName}`;
+    } else if (!fileName) {
+        // If the user cancels the file selection, clear the display
+        const fileNameDisplay = document.getElementById('file-name-display');
+        if (fileNameDisplay) {
+            fileNameDisplay.remove();
+        }
+    }
+});
+
+// Function to display results
 function displayResult(result) {
-    outputDiv.style.borderColor = 'var(--color-accent-red)'; // Highlight on new result
-    outputDiv.style.boxShadow = '0 0 30px rgba(220, 38, 38, 0.7)';
+    if (result.classification === "Error" || result.error) {
+        outputDiv.style.borderColor = 'var(--color-accent-red)';
+        outputDiv.style.boxShadow = '0 0 30px rgba(220, 38, 38, 0.7)';
+        resultText.innerHTML = `
+            <p class="output-title" style="color: var(--color-accent-red); font-size: 2rem;">
+                Error Processing CSV
+            </p>
+            <p style="color: #ff6b6b; margin-top: 10px;">
+                ${result.error || 'Unknown error occurred'}
+            </p>
+            <p style="margin-top: 15px; font-size: 0.9rem;">
+                Please check your CSV format and try again.
+            </p>
+        `;
+        return;
+    }
+
+    outputDiv.style.borderColor = 'var(--color-accent-blue)';
+    outputDiv.style.boxShadow = '0 0 30px rgba(14, 165, 233, 0.7)';
     resultText.innerHTML = `
-        <p class="output-title" style="color: var(--color-accent-red); font-size: 2rem;">
-            Classification: <span style="color: var(--color-accent-blue);">${result.classification || 'Unknown'}</span>
+        <p class="output-title" style="color: var(--color-accent-blue); font-size: 2rem;">
+            Classification: <span style="color: var(--color-accent-red);">${result.classification || 'Unknown'}</span>
         </p>
         <p>Confidence Score: ${result.confidence_score || 'N/A'}</p>
-        <p style="margin-top: 15px;">The AI model has processed the data. A classification of 'Candidate' suggests a potential exoplanet, while 'Confirmed' means it meets all criteria.</p>
+        <p style="margin-top: 15px;">
+            The AI model has processed the data. 'Candidate' suggests a potential exoplanet, 'Confirmed' means it meets all criteria.
+        </p>
     `;
 }
 
-// Function to handle the API call
-async function sendDataToAPI(payload, endpoint = '/identify-manual') {
-    // Clear previous results and show loading state
+// Function to display error
+function displayError(message) {
+    resultText.textContent = message;
+    outputDiv.style.borderColor = 'var(--color-accent-red)';
+    outputDiv.style.boxShadow = '0 0 30px rgba(220, 38, 38, 0.5)';
+}
+
+// Function to send manual input to API
+async function sendManualData(payload) {
     resultText.textContent = "Analyzing data... Stand by for classification.";
     outputDiv.style.borderColor = '#555';
     outputDiv.style.boxShadow = 'none';
 
     try {
-        const response = await fetch(API_URL + endpoint, {
+        const response = await fetch(API_URL, {
             method: 'POST',
-            headers: {
-                'Content-Type': 'application/json',
-            },
-            body: JSON.stringify(payload),
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify(payload)
         });
 
-        if (!response.ok) {
-            throw new Error(`HTTP error! Status: ${response.status}`);
-        }
+        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
         const data = await response.json();
         displayResult(data);
-
     } catch (error) {
         console.error('API Error:', error);
-        resultText.textContent = `Error during analysis: ${error.message}. Please check your input and try again.`;
-        outputDiv.style.borderColor = 'var(--color-accent-red)';
-        outputDiv.style.boxShadow = '0 0 30px var(--shadow-hover)';
+        displayError(`Error during analysis: ${error.message}`);
     }
 }
 
-// 2. Event Listener for Manual Input Form
+// Manual Form Submission
 manualForm.addEventListener('submit', function (e) {
-    e.preventDefault(); // Stop page reload
+    e.preventDefault();
 
-    // Create payload from form data
     const formData = new FormData(manualForm);
     const payload = {};
+
     for (const [key, value] of formData.entries()) {
-        // Convert input values to float numbers for the model
         payload[key] = parseFloat(value);
     }
 
-    // Send manual data to API
-    sendDataToAPI(payload, '/identify-manual');
+    sendManualData(payload);
 });
 
-// 3. Event Listener for CSV Upload Form
+// CSV Upload Form
 csvForm.addEventListener('submit', function (e) {
-    e.preventDefault(); // Stop page reload
+    e.preventDefault();
 
-    const fileInput = document.getElementById('csv-file');
-    if (fileInput.files.length === 0) {
-        resultText.textContent = "Please select a CSV file to upload.";
+    if (!fileInput.files || fileInput.files.length === 0) {
+        displayError("Please select a CSV file to upload.");
         return;
     }
 
-    // Note: CSV processing is complex and usually requires a backend.
-    // This frontend logic is simplified for demonstration.
-    // In a real application, you would typically upload the file to an API endpoint 
-    // that handles file parsing and extraction.
+    const file = fileInput.files[0];
+    if (!file.name.endsWith('.csv')) {
+        displayError("Please upload a valid CSV file.");
+        return;
+    }
 
-    // Example of a file-based API call (uses FormData to send the actual file)
     const fileData = new FormData();
-    fileData.append('csv_file', fileInput.files[0]);
+    fileData.append('file', file);
 
-    // Show loading state
     resultText.textContent = "Uploading and analyzing CSV file...";
+    outputDiv.style.borderColor = '#555';
+    outputDiv.style.boxShadow = 'none';
 
-    fetch(API_URL + '/identify-csv', {
+    fetch(CSV_API_URL, {
         method: 'POST',
-        body: fileData, // Send file data directly
+        body: fileData
     })
-        .then(response => {
-            if (!response.ok) {
-                throw new Error(`HTTP error! Status: ${response.status}`);
-            }
-            return response.json();
+        .then(res => {
+            if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+            return res.json();
         })
-        .then(data => displayResult(data))
+        .then(data => {
+            displayResult(data);
+
+            // Optional: If you want the filename to clear after success, uncomment this block:
+            // fileInput.value = '';
+            // const fileNameDisplay = document.getElementById('file-name-display');
+            // if (fileNameDisplay) fileNameDisplay.remove();
+        })
         .catch(error => {
             console.error('CSV API Error:', error);
-            resultText.textContent = `Error during CSV upload/analysis: ${error.message}.`;
+            displayError(`Error during CSV upload/analysis: ${error.message}`);
         });
 });

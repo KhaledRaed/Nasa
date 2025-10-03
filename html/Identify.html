@@ -24,6 +24,7 @@
 
     <style>
         :root {
+            /* Keep all root variables defined here for consistency */
             --color-dark-space: #000000;
             --color-navy: #0a1128;
             --color-light-text: #e8edf5;
@@ -173,16 +174,16 @@
                         Notes:**
                     </p>
                     <ul class="csv-guidelines">
-                        <li>Make sure the data is in the **2nd row** of the CSV file.</li>
-                        <li>Ensure the columns are in the **same order** as the manual input fields.</li>
+                        <li>Make sure the data is in the *2nd row* of the CSV file.</li>
+                        <li>Ensure the columns are in the *same order* as the manual input fields.</li>
                     </ul>
                     <form id="csvIdentifyForm" class="identify-form">
                         <div class="input-group file-upload-group">
                             <label for="csv-file" class="file-label">Choose CSV File</label>
-                            <input type="file" id="csv-file" name="csv-file" accept=".csv" required>
+                            <input type="file" id="csv-file" name="csv-file" accept=".csv">
                         </div>
                         <button type="submit" class="cta-button submit-button"><i class="fas fa-upload"></i>
-                            import your CSV to Analyze</button>
+                            Upload & Analyze</button>
                     </form>
                 </div>
             </div>
