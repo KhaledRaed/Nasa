@@ -21,6 +21,7 @@
     <link rel="stylesheet" href="Css/header.css">
     <link rel="stylesheet" href="Css/home.css">
     <link rel="stylesheet" href="Css/about.css">
+    <link rel="stylesheet" href="Css/planets.css">
     <link rel="stylesheet" href="Css/team.css">
     <link rel="stylesheet" href="Css/responsive.css">
     <style>
@@ -70,7 +71,7 @@
             <nav>
                 <a href="#" class="logo" aria-label="Exoquest Home">
                     <div class="logo-icon-container">
-                        <img src="./midea/logo.png" alt="Exoquest Logo Icon" class="logo-icon">
+                        <img src="./media/logo.png" alt="Exoquest Logo Icon" class="logo-icon">
                     </div>
                     <svg class="logo-text-svg" viewBox="0 0 200 50" aria-hidden="true">
                         <text x="20" y="25" class="logo-title">Exoquest</text>
@@ -87,6 +88,7 @@
                 <ul class="nav-menu" id="navMenu">
                     <li><a href="#home" class="active">Home</a></li>
                     <li><a href="#about-us">About Us</a></li>
+                    <li><a href="#planets-section">Planets</a></li>
                     <li><a href="#team">Our Team</a></li>
                     <li><a href="#identify" class="cta-button">Identify</a></li>
                 </ul>
@@ -115,13 +117,13 @@
             <div class="video-background" id="videoBackground">
                 <video class="video-fullscreen desktop-video" autoplay loop muted playsinline preload="auto"
                     fetchpriority="high">
-                    <source src="./midea/mars.mp4" type="video/mp4">
+                    <source src="./media/mars.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
 
                 <video class="video-fullscreen mobile-video" autoplay loop muted playsinline preload="auto"
                     fetchpriority="high">
-                    <source src="./midea/mars.mp4" type="video/mp4">
+                    <source src="./media/mars.mp4" type="video/mp4">
                     Your browser does not support the video tag.
                 </video>
             </div>
@@ -140,35 +142,68 @@
             </div>
         </section>
 
+        <!-- Planets Section -->
+        <section id="planets-section" class="planets-section">
+            <h2 class="section-title">Explore Exoplanets</h2>
+            <p class="section-subtitle">A brief look at some of the most fascinating worlds.</p>
+
+            <div class="planets-container">
+                <div class="planet-list-column">
+                    <ul id="planet-list">
+                        <li class="planet-item active" data-planet="Kepler-186f">Kepler-186f</li>
+                        <li class="planet-item" data-planet="TRAPPIST-1e">TRAPPIST-1e</li>
+                        <li class="planet-item" data-planet="HD 209458 b">HD 209458 b</li>
+                        <li class="planet-item" data-planet="WASP-12b">WASP-12b</li>
+                        <li class="planet-item" data-planet="51 Pegasi b">51 Pegasi b</li>
+                    </ul>
+                </div>
+
+                <div class="planet-details-column">
+                    <div id="planet-details-card" class="planet-details-card">
+                        <h3 id="planet-title">Select a Planet from the list</h3>
+                        <div class="planet-images">
+                            <img id="image-primary" src="" alt="Primary image of selected planet"
+                                class="planet-image primary-image"> <img id="image-secondary" src=""
+                                alt="Secondary image of selected planet" class="planet-image secondary-image">
+                        </div>
+                        <p id="planet-description">Click on a planet name in the list to the left to view its details,
+                            images, and a short article.</p> <a id="read-more-link" href="#" target="_blank"
+                            class="cta-button read-more-button" style="display: none;">Read More</a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- Our Team Section -->
         <section id="team" class="team-section">
             <h2 class="section-title">Meet Our Mission Team</h2>
             <p class="section-subtitle">The brilliant minds driving the future of space exploration.</p>
             <div class="team-grid">
                 <div class="team-row">
                     <div class="team-member">
-                        <img src="./midea/Qusai Abu Ghannam.jpeg" alt="" class="member-photo">
+                        <img src="./media/Qusai Abu Ghannam.jpeg" alt="" class="member-photo">
                         <h3>Qusai Abu-Ghannam</h3>
                         <p class="member-title">AI Developer</p>
                     </div>
                     <div class="team-member">
-                        <img src="./midea/Mohammad Ghabboun.jpg" alt="" class="member-photo">
+                        <img src="./media/Mohammad Ghabboun.jpg" alt="" class="member-photo">
                         <h3>Mohammad Ghabboun</h3>
                         <p class="member-title">Data analyst</p>
                     </div>
                     <div class="team-member">
-                        <img src="./midea/khaled raed.jpg" alt="" class="member-photo">
+                        <img src="./media/khaled raed.jpg" alt="" class="member-photo">
                         <h3>Khaled Raed</h3>
                         <p class="member-title">Front-End Developer</p>
                     </div>
                 </div>
                 <div class="team-row-2">
                     <div class="team-member">
-                        <img src="./midea/ALBARA SAMER .JPG" alt="" class="member-photo">
+                        <img src="./media/ALBARA SAMER .JPG" alt="" class="member-photo">
                         <h3>Albara Samer</h3>
                         <p class="member-title">AI Developer</p>
                     </div>
                     <div class="team-member">
-                        <img src="./midea/Omar Aldamiri.jpg" alt="" class="member-photo">
+                        <img src="./media/Omar Aldamiri.jpg" alt="" class="member-photo">
                         <h3>Omar Al-Damiri</h3>
                         <p class="member-title">Back-End Developer</p>
                     </div>
@@ -182,6 +217,7 @@
     <script src="Js/stars.js"></script>
     <script src="Js/header.js"></script>
     <script src="Js/about.js"></script>
+    <script src="Js/planets.js"></script>
 </body>
 
 </html>
