@@ -39,6 +39,8 @@ document.addEventListener('DOMContentLoaded', () => {
     const imagePrimary = document.getElementById('image-primary');
     const readMoreLink = document.getElementById('read-more-link');
     const detailsCard = document.getElementById('planet-details-card');
+    
+    let exploreMoreBtn = null;
 
     // Update Details Function with smooth transitions
     function updatePlanetDetails(planetName) {
@@ -54,8 +56,38 @@ document.addEventListener('DOMContentLoaded', () => {
             // Update content
             planetTitle.textContent = data.title;
             planetDescription.textContent = data.article;
+            planetDescription.classList.add('truncated');
+            planetDescription.classList.remove('expanded');
+            
             readMoreLink.href = data.readMore;
             readMoreLink.style.display = 'inline-block';
+
+            // Remove old explore more button if exists
+            if (exploreMoreBtn) {
+                exploreMoreBtn.remove();
+            }
+
+            // Create explore more button
+            exploreMoreBtn = document.createElement('button');
+            exploreMoreBtn.className = 'explore-more-btn';
+            exploreMoreBtn.innerHTML = 'Explore More <i class="fas fa-chevron-down"></i>';
+            
+            exploreMoreBtn.addEventListener('click', function() {
+                if (planetDescription.classList.contains('truncated')) {
+                    planetDescription.classList.remove('truncated');
+                    planetDescription.classList.add('expanded');
+                    this.innerHTML = 'Show Less <i class="fas fa-chevron-down"></i>';
+                    this.classList.add('expanded');
+                } else {
+                    planetDescription.classList.remove('expanded');
+                    planetDescription.classList.add('truncated');
+                    this.innerHTML = 'Explore More <i class="fas fa-chevron-down"></i>';
+                    this.classList.remove('expanded');
+                }
+            });
+
+            // Insert button after description
+            planetDescription.parentNode.insertBefore(exploreMoreBtn, readMoreLink);
 
             // Update Image
             imagePrimary.src = data.image1;
