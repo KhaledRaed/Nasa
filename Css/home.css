@@ -121,27 +121,6 @@
     }
 }
 
-.mission-banner {
-    position: fixed;
-    top: 80px;
-    right: 20px;
-    background: linear-gradient(135deg, rgba(14, 165, 233, 0.9), rgba(168, 85, 247, 0.9));
-    color: white;
-    padding: 0.75rem 1.5rem;
-    border-radius: 50px;
-    font-size: 0.85rem;
-    font-weight: 600;
-    box-shadow: 0 4px 20px rgba(14, 165, 233, 0.3);
-    z-index: 999;
-    animation: slideInRight 0.8s ease-out 1s both;
-    display: flex;
-    align-items: center;
-    gap: 10px;
-}
-
-.mission-banner i {
-    animation: pulse 2s ease-in-out infinite;
-}
 
 @keyframes slideInRight {
     from {
@@ -191,12 +170,6 @@
         text-align: center;
     }
 
-    .mission-banner {
-        font-size: 0.75rem;
-        padding: 0.5rem 1rem;
-        top: 70px;
-        right: 10px;
-    }
 
     .scroll-indicator {
         bottom: 20px;
