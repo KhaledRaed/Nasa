@@ -1,5 +1,5 @@
 const starsContainer = document.getElementById('starsContainer');
-const starCount = 200;
+const starCount = 300; // Increased for better visibility
 const starTypes = ['small', 'medium', 'large'];
 const starColors = ['', 'blue', 'yellow', 'red'];
 
@@ -37,6 +37,32 @@ function scheduleMeteor() {
     setTimeout(scheduleMeteor, Math.random() * 5000 + 2000);
 }
 
+// Control starfield visibility based on scroll position
+function updateStarfieldOpacity() {
+    const aboutSection = document.getElementById('about-us');
+    const planetsSection = document.getElementById('planets-section');
+    
+    if (!aboutSection || !planetsSection) return;
+    
+    const scrollY = window.scrollY;
+    const aboutBottom = aboutSection.offsetTop + aboutSection.offsetHeight;
+    const planetsTop = planetsSection.offsetTop;
+    const planetsBottom = planetsTop + planetsSection.offsetHeight;
+    
+    // Make stars more visible in planets section
+    if (scrollY > aboutBottom - 200 && scrollY < planetsBottom) {
+        starsContainer.style.opacity = '1';
+    } else if (scrollY < aboutSection.offsetTop + 100) {
+        starsContainer.style.opacity = '1';
+    } else {
+        starsContainer.style.opacity = '0.3';
+    }
+}
+
 // Initialize
 generateStars();
 scheduleMeteor();
+
+// Add scroll listener for dynamic opacity
+window.addEventListener('scroll', updateStarfieldOpacity);
+window.addEventListener('load', updateStarfieldOpacity);
