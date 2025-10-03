@@ -47,6 +47,9 @@
 }
 
 .input-group label {
+    font-family: "Space Mono", monospace;
+    font-weight: 400;
+    font-style: normal;
     margin-bottom: 5px;
     font-size: 0.9rem;
     color: var(--color-light-text);
@@ -94,7 +97,9 @@
     margin-top: 15px;
     padding: 12px;
     font-size: 1rem;
-    font-weight: 700;
+    font-family: "Space Mono", monospace;
+    font-weight: 400;
+    font-style: normal;
     cursor: pointer;
     transition: var(--transition-speed);
 }
@@ -106,6 +111,9 @@
     text-align: center;
     font-style: italic;
     color: #ccc;
+    font-family: "Space Mono", monospace;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .csv-guidelines li {
@@ -117,9 +125,15 @@
     font-weight: 700;
     color: var(--color-light-text);
     margin-top: 10px;
+    font-family: "Space Mono", monospace;
+    font-weight: 400;
+    font-style: normal;
 }
 
 .identification-output {
+    font-family: "Space Mono", monospace;
+    font-weight: 400;
+    font-style: normal;
     margin-top: 60px;
     padding: 40px;
     border-radius: 12px;
