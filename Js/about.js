@@ -53,8 +53,8 @@ window.addEventListener('scroll', throttledScrollHandler);
 window.addEventListener('load', checkSectionInView);
 window.addEventListener('resize', checkSectionInView);
 
-// Animated Counter for Stats
-function animateCounter(element, target, duration = 2000) {
+// Animated Counter for Stats with Decimal Support
+function animateCounter(element, target, duration = 2000, decimals = 1) {
     const start = 0;
     const increment = target / (duration / 16);
     let current = start;
@@ -62,10 +62,10 @@ function animateCounter(element, target, duration = 2000) {
     const timer = setInterval(() => {
         current += increment;
         if (current >= target) {
-            element.textContent = Math.ceil(target);
+            element.textContent = target.toFixed(decimals);
             clearInterval(timer);
         } else {
-            element.textContent = Math.ceil(current);
+            element.textContent = current.toFixed(decimals);
         }
     }, 16);
 }
@@ -76,8 +76,8 @@ const statsObserver = new IntersectionObserver((entries) => {
         if (entry.isIntersecting) {
             const statNumber = entry.target.querySelector('.stat-number');
             if (statNumber && !statNumber.classList.contains('animated')) {
-                const target = parseInt(statNumber.getAttribute('data-target'));
-                animateCounter(statNumber, target);
+                const target = parseFloat(statNumber.getAttribute('data-target'));
+                animateCounter(statNumber, target, 2000, 1);
                 statNumber.classList.add('animated');
             }
         }
