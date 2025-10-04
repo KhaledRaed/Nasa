@@ -12,7 +12,213 @@
     <!-- Fonts -->
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Classify exoplanets using AI technology">
+    <title>Exoquest-404!! - Identify Planet</title>
+        <link rel="icon" type="image/png" href="../media/logo.png">
+
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
+        href="https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="../Css/styles.css">
+    <link rel="stylesheet" href="../Css/header.css">
+    <link rel="stylesheet" href="../Css/identify.css">
+
+    <style>
+        #inputFormsContainer {
+            display: none;
+            /* Added to manage visibility in JS */
+        }
+    </style>
+</head>
+
+<body>
+    <div class="loading-screen">
+        <div class="loader"></div>
+    </div>
+
+    <div class="scroll-progress"></div>
+
+    <a href="#main-content" class="skip-link">Skip to main content</a>
+
+    <div class="stars-container" id="starsContainer">
+        <div class="nebula"></div>
+        <div class="nebula"></div>
+        <div class="nebula"></div>
+        <div class="nebula"></div>
+    </div>
+
+    <header id="mainHeader">
+        <nav>
+            <a href="../index.html" class="logo" aria-label="Exoquest Home">
+                <div class="logo-icon-container">
+                    <img src="../media/logo.png" alt="Exoquest Logo Icon" class="logo-icon">
+                </div>
+                <svg class="logo-text-svg" viewBox="0 0 200 50" aria-hidden="true">
+                    <text x="20" y="25" class="logo-title">Exoquest</text>
+                    <text x="20" y="45" class="logo-subtitle">404!!</text>
+                </svg>
+            </a>
+
+            <button class="menu-toggle" id="menuToggle" aria-label="Toggle navigation" aria-expanded="false">
+                <span></span>
+                <span></span>
+                <span></span>
+            </button>
+
+            <ul class="nav-menu" id="navMenu">
+                <li><a href="../index.html#home">Home</a></li>
+                <li><a href="../index.html#about-us">About Us</a></li>
+                <li><a href="../index.html#planets-section">Planets</a></li>
+                <li><a href="../index.html#team">Our Team</a></li>
+                <li><a href="identify.html" class="cta-button active">Identify</a></li>
+            </ul>
+        </nav>
+    </header>
+
+    <main id="main-content">
+        <section id="identify" class="identify-section">
+            <h2 class="section-title">Exoplanet Identification Tool</h2>
+            <p class="section-subtitle">Input exoplanet data to get AI-powered classification results</p>
+
+            <div class="identify-container" id="initialInputCard">
+                 <button type="button" class="cta-button submit-button full-width-button" id="startIdentificationBtn" style="padding: 1.5rem; font-size: 1.25rem;">
+                    <i class="fas fa-satellite-dish fa-lg mr-2"></i> Start Exoplanet Identification
+                </button>
+            </div>
+
+
+            <div id="inputFormsContainer" class="identify-container">
+                <div class="identify-form-card manual-input-card">
+                    <h3><i class="fas fa-keyboard"></i> Manual Data Input</h3>
+                    <p class="manual-notes">
+                        <i class="fas fa-info-circle"></i> Accuracy Note:
+                    </p>
+                    <ul class="manual-guidelines">
+                        <li>All 14 parameters are required for classification</li>
+                        <li>Fewer features = <strong>lower prediction accuracy</strong></li>
+                        <li>Ensure data precision for best results</li>
+                    </ul>
+                    <form id="manualIdentifyForm" class="identify-form">
+                        <div class="input-grid">
+                            <div class="input-group">
+                                <label for="koi_period">Orbital Period (days)</label>
+                                <input type="number" step="any" id="koi_period" name="koi_period" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="koi_time0bk">Transit Midpoint (BKJD)</label>
+                                <input type="number" step="any" id="koi_time0bk" name="koi_time0bk" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="koi_eccen">Eccentricity</label>
+                                <input type="number" step="any" id="koi_eccen" name="koi_eccen" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="koi_impact">Impact Parameter</label>
+                                <input type="number" step="any" id="koi_impact" name="koi_impact" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="koi_duration">Transit Duration (hours)</label>
+                                <input type="number" step="any" id="koi_duration" name="koi_duration" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="koi_depth">Transit Depth (ppm)</label>
+                                <input type="number" step="any" id="koi_depth" name="koi_depth" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="koi_ror">Radius Ratio (Rp/R*)</label>
+                                <input type="number" step="any" id="koi_ror" name="koi_ror" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="koi_srho">Stellar Density (g/cm³)</label>
+                                <input type="number" step="any" id="koi_srho" name="koi_srho" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="koi_prad">Planet Radius (R⊕)</label>
+                                <input type="number" step="any" id="koi_prad" name="koi_prad" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="koi_sma">Semi-major Axis (AU)</label>
+                                <input type="number" step="any" id="koi_sma" name="koi_sma" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="koi_incl">Inclination (degrees)</label>
+                                <input type="number" step="any" id="koi_incl" name="koi_incl" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="koi_teq">Equilibrium Temperature (K)</label>
+                                <input type="number" step="any" id="koi_teq" name="koi_teq" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="koi_insol">Insolation Flux (F⊕)</label>
+                                <input type="number" step="any" id="koi_insol" name="koi_insol" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="koi_dor">Distance/Star Radius</label>
+                                <input type="number" step="any" id="koi_dor" name="koi_dor" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="cta-button submit-button">
+                            <i class="fas fa-search"></i> Analyze Planet
+                        </button>
+                    </form>
+                </div>
+
+                <div class="identify-form-card csv-input-card">
+                    <h3><i class="fas fa-file-csv"></i> Import Data via CSV</h3>
+                    <p class="csv-notes">
+                        <i class="fas fa-exclamation-triangle"></i> Important Notes:
+                    </p>
+                    <ul class="csv-guidelines">
+                        <li>Data must be in the <strong>2nd row</strong> of the CSV file</li>
+                        <li>Columns must be in the <strong>same order</strong> as manual input fields</li>
+                        <li>**14 parameters** are required (matching the manual input fields)</li>
+                    </ul>
+                    <form id="csvIdentifyForm" class="identify-form">
+                        <div class="input-group file-upload-group">
+                            <label for="csv-file" class="file-label">
+                                <i class="fas fa-cloud-upload-alt"></i> Choose CSV File
+                            </label>
+                            <input type="file" id="csv-file" name="file" accept=".csv">
+                        </div>
+                        <button type="submit" class="cta-button submit-button">
+                            <i class="fas fa-upload"></i> Upload & Analyze
+                        </button>
+                        <button type="button" class="download-sample-btn" id="downloadSampleBtn">
+                            <i class="fas fa-download"></i> Download Sample CSV
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="identification-output" id="identificationOutput">
+                <h3 class="output-title">
+                    <i class="fas fa-chart-line"></i> Identification Result
+                </h3>
+                <p id="result-text" class="initial-message">
+                    Input data manually or upload a CSV file and press 'Analyze Planet' to see the AI's classification
+                    result here.
+                </p>
+            </div>
+        </section>
+    </main>
+
+    <script src="../Js/main.js"></script>
+    <script src="../Js/header.js"></script>
+    <script src="../Js/identify.js"></script>
+</body>
+
+</html>
         href="https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
         rel="stylesheet">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">

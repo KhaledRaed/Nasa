@@ -1,0 +1,122 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="description" content="Classify exoplanets using AI technology">
+    <title>Exoquest-404!! - Manual Data Input</title>
+    <link rel="icon" type="image/png" href="../media/logo.png">
+
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link
+        href="https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
+        rel="stylesheet">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <link rel="stylesheet" href="../Css/styles.css">
+    <link rel="stylesheet" href="../Css/identify.css">
+</head>
+
+<body>
+    <main id="main-content">
+        <section id="manual-input" class="identify-section">
+            <h2 class="section-title">Manual Data Entry</h2>
+            <p class="section-subtitle">Input 14 exoplanet parameters for AI classification</p>
+
+            <div class="identify-container single-card-container">
+                <div class="identify-form-card manual-input-card large-manual-card">
+                    <h3><i class="fas fa-keyboard"></i> Exoplanet Parameters</h3>
+                    <p class="manual-notes">
+                        <i class="fas fa-info-circle"></i> Accuracy Note:
+                    </p>
+                    <ul class="manual-guidelines">
+                        <li>All 14 parameters are required for classification</li>
+                        <li>Fewer features = <strong>lower prediction accuracy</strong></li>
+                        <li>Ensure data precision for best results</li>
+                    </ul>
+                    <form id="manualIdentifyForm" class="identify-form">
+                        <div class="input-grid">
+                            <div class="input-group">
+                                <label for="koi_period">Orbital Period (days)</label>
+                                <input type="number" step="any" id="koi_period" name="koi_period" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="koi_time0bk">Transit Midpoint (BKJD)</label>
+                                <input type="number" step="any" id="koi_time0bk" name="koi_time0bk" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="koi_eccen">Eccentricity</label>
+                                <input type="number" step="any" id="koi_eccen" name="koi_eccen" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="koi_impact">Impact Parameter</label>
+                                <input type="number" step="any" id="koi_impact" name="koi_impact" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="koi_duration">Transit Duration (hours)</label>
+                                <input type="number" step="any" id="koi_duration" name="koi_duration" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="koi_depth">Transit Depth (ppm)</label>
+                                <input type="number" step="any" id="koi_depth" name="koi_depth" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="koi_ror">Radius Ratio (Rp/R*)</label>
+                                <input type="number" step="any" id="koi_ror" name="koi_ror" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="koi_srho">Stellar Density (g/cm³)</label>
+                                <input type="number" step="any" id="koi_srho" name="koi_srho" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="koi_prad">Planet Radius (R⊕)</label>
+                                <input type="number" step="any" id="koi_prad" name="koi_prad" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="koi_sma">Semi-major Axis (AU)</label>
+                                <input type="number" step="any" id="koi_sma" name="koi_sma" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="koi_incl">Inclination (degrees)</label>
+                                <input type="number" step="any" id="koi_incl" name="koi_incl" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="koi_teq">Equilibrium Temperature (K)</label>
+                                <input type="number" step="any" id="koi_teq" name="koi_teq" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="koi_insol">Insolation Flux (F⊕)</label>
+                                <input type="number" step="any" id="koi_insol" name="koi_insol" required>
+                            </div>
+                            <div class="input-group">
+                                <label for="koi_dor">Distance/Star Radius</label>
+                                <input type="number" step="any" id="koi_dor" name="koi_dor" required>
+                            </div>
+                        </div>
+                        <button type="submit" class="cta-button submit-button">
+                            <i class="fas fa-search"></i> Analyze Planet
+                        </button>
+                    </form>
+                </div>
+            </div>
+
+            <div class="identification-output" id="identificationOutput">
+                <h3 class="output-title">
+                    <i class="fas fa-chart-line"></i> Analysis Status
+                </h3>
+                <p id="result-text" class="initial-message">
+                    Enter the data above and press 'Analyze Planet' to begin classification.
+                </p>
+            </div>
+
+        </section>
+    </main>
+
+    <script src="../Js/main.js"></script>
+    <script src="../Js/header.js"></script>
+    <script src="../Js/manual_script.js"></script>
+</body>
+
+</html>

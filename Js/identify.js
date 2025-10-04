@@ -1,8 +1,10 @@
-const manualForm = document.getElementById('manualIdentifyForm');
 const csvForm = document.getElementById('csvIdentifyForm');
 const outputDiv = document.getElementById('identificationOutput');
 const resultText = document.getElementById('result-text');
 const fileInput = document.getElementById('csv-file');
+
+// Note: Manual form elements and logic have been removed from this file 
+// and moved to the new manual_script.js
 
 // Download Sample CSV functionality
 document.getElementById('downloadSampleBtn').addEventListener('click', function () {
@@ -24,8 +26,8 @@ document.getElementById('downloadSampleBtn').addEventListener('click', function 
     document.body.removeChild(link);
 });
 
-// Set your FastAPI backend URLs
-const API_URL = 'http://127.0.0.1:8000/predict';
+// Set your FastAPI backend URL (Only CSV_API_URL is strictly needed here now)
+// const API_URL = 'http://127.0.0.1:8000/predict'; // Removed
 const CSV_API_URL = 'http://127.0.0.1:8000/predict-csv';
 
 // Add file input change listener to show selected file
@@ -69,44 +71,6 @@ function displayError(message) {
     outputDiv.style.boxShadow = '0 0 30px rgba(220, 38, 38, 0.5)';
 }
 
-// Function to send manual input to API
-async function sendManualData(payload) {
-    resultText.textContent = "Analyzing data... Stand by for classification.";
-    outputDiv.style.borderColor = '#555';
-    outputDiv.style.boxShadow = 'none';
-
-    try {
-        const response = await fetch(API_URL, {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify(payload)
-        });
-
-        if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
-
-        const data = await response.json();
-        return data;
-    } catch (error) {
-        console.error('API Error:', error);
-        displayError(`Error during analysis: ${error.message}`);
-        return { classification: "Error", error: error.message };
-    }
-}
-
-// Manual Form Submission
-manualForm.addEventListener('submit', async function (e) {
-    e.preventDefault();
-
-    const formData = new FormData(manualForm);
-    const payload = {};
-
-    for (const [key, value] of formData.entries()) {
-        payload[key] = parseFloat(value);
-    }
-
-    const result = await sendManualData(payload);
-    redirectToOutput(result, payload);
-});
 
 // CSV Upload Form
 csvForm.addEventListener('submit', function (e) {
@@ -134,7 +98,7 @@ csvForm.addEventListener('submit', function (e) {
             return;
         }
 
-        const values = rows[1]; // الصف الثاني
+        const values = rows[1]; 
 
         const features = [
             "koi_period",
@@ -153,6 +117,7 @@ csvForm.addEventListener('submit', function (e) {
             "koi_dor"
         ];
 
+        // This payload is used to display the input data on the output page
         const payload = {};
         features.forEach((f, i) => {
             payload[f] = parseFloat(values[i]);
