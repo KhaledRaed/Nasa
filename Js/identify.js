@@ -11,12 +11,9 @@ const CSV_API_URL = 'http://127.0.0.1:8000/predict-csv';
 // Add file input change listener to show selected file
 fileInput.addEventListener('change', function (e) {
     const fileName = e.target.files[0]?.name;
-    // Get the visible label element for the file input
     const fileLabel = document.querySelector('label[for="csv-file"]');
-    
-    // Check if a file was selected AND if the label was found
+
     if (fileName && fileLabel) {
-        // Find or create a display element for the filename
         let fileNameDisplay = document.getElementById('file-name-display');
         if (!fileNameDisplay) {
             fileNameDisplay = document.createElement('p');
@@ -24,13 +21,10 @@ fileInput.addEventListener('change', function (e) {
             fileNameDisplay.style.marginTop = '10px';
             fileNameDisplay.style.color = 'var(--color-accent-blue)';
             fileNameDisplay.style.fontSize = '0.9rem';
-
-            // *** NEW FIX IMPLEMENTED HERE: Insert the element immediately after the visible label ***
             fileLabel.insertAdjacentElement("afterend", fileNameDisplay);
         }
         fileNameDisplay.textContent = `Selected file: ${fileName}`;
     } else if (!fileName) {
-        // If the user cancels the file selection, clear the display
         const fileNameDisplay = document.getElementById('file-name-display');
         if (fileNameDisplay) {
             fileNameDisplay.remove();
@@ -38,39 +32,17 @@ fileInput.addEventListener('change', function (e) {
     }
 });
 
-// Function to display results
-function displayResult(result) {
-    if (result.classification === "Error" || result.error) {
-        outputDiv.style.borderColor = 'var(--color-accent-red)';
-        outputDiv.style.boxShadow = '0 0 30px rgba(220, 38, 38, 0.7)';
-        resultText.innerHTML = `
-            <p class="output-title" style="color: var(--color-accent-red); font-size: 2rem;">
-                Error Processing CSV
-            </p>
-            <p style="color: #ff6b6b; margin-top: 10px;">
-                ${result.error || 'Unknown error occurred'}
-            </p>
-            <p style="margin-top: 15px; font-size: 0.9rem;">
-                Please check your CSV format and try again.
-            </p>
-        `;
-        return;
-    }
-
-    outputDiv.style.borderColor = 'var(--color-accent-blue)';
-    outputDiv.style.boxShadow = '0 0 30px rgba(14, 165, 233, 0.7)';
-    resultText.innerHTML = `
-        <p class="output-title" style="color: var(--color-accent-blue); font-size: 2rem;">
-            Classification: <span style="color: var(--color-accent-red);">${result.classification || 'Unknown'}</span>
-        </p>
-        <p>Confidence Score: ${result.confidence_score || 'N/A'}</p>
-        <p style="margin-top: 15px;">
-            The AI model has processed the data. 'Candidate' suggests a potential exoplanet, 'Confirmed' means it meets all criteria.
-        </p>
-    `;
+// Redirect output to output.html
+function redirectToOutput(result, inputData) {
+    const outputPayload = {
+        result: result,
+        input: inputData
+    };
+    localStorage.setItem("exoplanetResult", JSON.stringify(outputPayload));
+    window.location.href = "output.html";
 }
 
-// Function to display error
+// Error display
 function displayError(message) {
     resultText.textContent = message;
     outputDiv.style.borderColor = 'var(--color-accent-red)';
@@ -93,15 +65,16 @@ async function sendManualData(payload) {
         if (!response.ok) throw new Error(`HTTP error! Status: ${response.status}`);
 
         const data = await response.json();
-        displayResult(data);
+        return data;
     } catch (error) {
         console.error('API Error:', error);
         displayError(`Error during analysis: ${error.message}`);
+        return { classification: "Error", error: error.message };
     }
 }
 
 // Manual Form Submission
-manualForm.addEventListener('submit', function (e) {
+manualForm.addEventListener('submit', async function (e) {
     e.preventDefault();
 
     const formData = new FormData(manualForm);
@@ -111,7 +84,8 @@ manualForm.addEventListener('submit', function (e) {
         payload[key] = parseFloat(value);
     }
 
-    sendManualData(payload);
+    const result = await sendManualData(payload);
+    redirectToOutput(result, payload);
 });
 
 // CSV Upload Form
@@ -129,31 +103,64 @@ csvForm.addEventListener('submit', function (e) {
         return;
     }
 
-    const fileData = new FormData();
-    fileData.append('file', file);
+    const reader = new FileReader();
 
-    resultText.textContent = "Uploading and analyzing CSV file...";
-    outputDiv.style.borderColor = '#555';
-    outputDiv.style.boxShadow = 'none';
+    reader.onload = function (event) {
+        const csvText = event.target.result;
+        const rows = csvText.trim().split("\n").map(r => r.split(","));
 
-    fetch(CSV_API_URL, {
-        method: 'POST',
-        body: fileData
-    })
-        .then(res => {
-            if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
-            return res.json();
-        })
-        .then(data => {
-            displayResult(data);
+        if (rows.length < 2) {
+            displayError("CSV must have at least 2 rows (headers + data).");
+            return;
+        }
 
-            // Optional: If you want the filename to clear after success, uncomment this block:
-            // fileInput.value = '';
-            // const fileNameDisplay = document.getElementById('file-name-display');
-            // if (fileNameDisplay) fileNameDisplay.remove();
-        })
-        .catch(error => {
-            console.error('CSV API Error:', error);
-            displayError(`Error during CSV upload/analysis: ${error.message}`);
+        const values = rows[1]; // الصف الثاني
+
+        const features = [
+            "koi_period",
+            "koi_time0bk",
+            "koi_eccen",
+            "koi_impact",
+            "koi_duration",
+            "koi_depth",
+            "koi_ror",
+            "koi_srho",
+            "koi_prad",
+            "koi_sma",
+            "koi_incl",
+            "koi_teq",
+            "koi_insol",
+            "koi_dor"
+        ];
+
+        const payload = {};
+        features.forEach((f, i) => {
+            payload[f] = parseFloat(values[i]);
         });
+
+        const fileData = new FormData();
+        fileData.append('file', file);
+
+        resultText.textContent = "Uploading and analyzing CSV file...";
+        outputDiv.style.borderColor = '#555';
+        outputDiv.style.boxShadow = 'none';
+
+        fetch(CSV_API_URL, {
+            method: 'POST',
+            body: fileData
+        })
+            .then(res => {
+                if (!res.ok) throw new Error(`HTTP error! Status: ${res.status}`);
+                return res.json();
+            })
+            .then(data => {
+                redirectToOutput(data, payload);
+            })
+            .catch(error => {
+                console.error('CSV API Error:', error);
+                displayError(`Error during CSV upload/analysis: ${error.message}`);
+            });
+    };
+
+    reader.readAsText(file);
 });
