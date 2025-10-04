@@ -80,6 +80,14 @@
                 <!-- Manual Input Card -->
                 <div class="identify-form-card manual-input-card">
                     <h3><i class="fas fa-keyboard"></i> Manual Data Input</h3>
+                    <p class="manual-notes">
+                        <i class="fas fa-info-circle"></i> Accuracy Note:
+                    </p>
+                    <ul class="manual-guidelines">
+                        <li>All 14 parameters are required for classification</li>
+                        <li>Fewer features = <strong>lower prediction accuracy</strong></li>
+                        <li>Ensure data precision for best results</li>
+                    </ul>
                     <form id="manualIdentifyForm" class="identify-form">
                         <div class="input-grid">
                             <div class="input-group">
@@ -154,7 +162,7 @@
                     <ul class="csv-guidelines">
                         <li>Data must be in the <strong>2nd row</strong> of the CSV file</li>
                         <li>Columns must be in the <strong>same order</strong> as manual input fields</li>
-                        <li>All 14 parameters are required</li>
+                        <li>All 42 parameters are required</li>
                     </ul>
                     <form id="csvIdentifyForm" class="identify-form">
                         <div class="input-group file-upload-group">
@@ -166,6 +174,9 @@
                         </div>
                         <button type="submit" class="cta-button submit-button">
                             <i class="fas fa-upload"></i> Upload & Analyze
+                        </button>
+                        <button type="button" class="download-sample-btn" id="downloadSampleBtn">
+                            <i class="fas fa-download"></i> Download Sample CSV
                         </button>
                     </form>
                 </div>

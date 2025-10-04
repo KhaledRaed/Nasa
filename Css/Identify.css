@@ -149,6 +149,49 @@
     transform: translateY(0) scale(0.98);
 }
 
+.download-sample-btn {
+    width: 100%;
+    margin-top: 15px;
+    padding: 12px;
+    font-size: 0.95rem;
+    font-family: "Space Mono", monospace;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+    background: linear-gradient(135deg, rgba(34, 197, 94, 0.8), rgba(22, 163, 74, 0.9));
+    border: 1px solid rgba(34, 197, 94, 0.4);
+    border-radius: 8px;
+    color: white;
+    box-shadow: 0 4px 15px rgba(34, 197, 94, 0.3);
+    position: relative;
+    overflow: hidden;
+}
+
+.download-sample-btn::before {
+    content: '';
+    position: absolute;
+    top: 0;
+    left: -100%;
+    width: 100%;
+    height: 100%;
+    background: linear-gradient(90deg, transparent, rgba(255, 255, 255, 0.3), transparent);
+    transition: left 0.5s ease;
+}
+
+.download-sample-btn:hover::before {
+    left: 100%;
+}
+
+.download-sample-btn:hover {
+    transform: translateY(-3px) scale(1.02);
+    box-shadow: 0 6px 25px rgba(34, 197, 94, 0.5);
+    border-color: rgba(34, 197, 94, 0.6);
+}
+
+.download-sample-btn:active {
+    transform: translateY(0) scale(0.98);
+}
+
 .csv-guidelines {
     list-style: none;
     padding-left: 0;
@@ -173,6 +216,32 @@
     display: flex;
     align-items: center;
     gap: 10px;
+}
+
+.manual-notes {
+    font-weight: 700;
+    color: var(--color-accent-blue);
+    margin-top: 10px;
+    font-family: "Space Mono", monospace;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+}
+
+.manual-guidelines {
+    list-style: none;
+    padding-left: 0;
+    margin-bottom: 20px;
+    text-align: center;
+    font-style: italic;
+    color: rgba(232, 237, 245, 0.7);
+    font-family: "Space Mono", monospace;
+    font-size: 0.85rem;
+}
+
+.manual-guidelines li {
+    margin-bottom: 8px;
+    font-size: 0.9rem;
 }
 
 .identification-output {

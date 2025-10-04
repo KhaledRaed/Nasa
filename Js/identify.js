@@ -4,6 +4,26 @@ const outputDiv = document.getElementById('identificationOutput');
 const resultText = document.getElementById('result-text');
 const fileInput = document.getElementById('csv-file');
 
+// Download Sample CSV functionality
+document.getElementById('downloadSampleBtn').addEventListener('click', function () {
+    // Sample exoplanet data with proper format
+    const csvContent = `koi_period,koi_time0bk,koi_eccen,koi_impact,koi_duration,koi_depth,koi_ror,koi_srho,koi_prad,koi_sma,koi_incl,koi_teq,koi_insol,koi_dor
+10.85,131.51,0,0.146,2.95,615.8,0.02483,0.87,1.89,0.0929,89.277,793,34.956,11.89`;
+
+    // Create blob and download
+    const blob = new Blob([csvContent], { type: 'text/csv;charset=utf-8;' });
+    const link = document.createElement('a');
+    const url = URL.createObjectURL(blob);
+
+    link.setAttribute('href', url);
+    link.setAttribute('download', 'exoplanet_sample_data.csv');
+    link.style.visibility = 'hidden';
+
+    document.body.appendChild(link);
+    link.click();
+    document.body.removeChild(link);
+});
+
 // Set your FastAPI backend URLs
 const API_URL = 'http://127.0.0.1:8000/predict';
 const CSV_API_URL = 'http://127.0.0.1:8000/predict-csv';
