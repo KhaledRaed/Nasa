@@ -57,12 +57,12 @@ document.addEventListener('DOMContentLoaded', () => {
     let rotation = 0; // For chart animation
 
     /**
-     * Helper to convert polar coordinates to Cartesian coordinates.
-     * @param {number} centerX - The X coordinate of the center.
-     * @param {number} centerY - The Y coordinate of the center.
-     * @param {number} angle - The angle in radians.
-     * @param {number} radius - The distance from the center.
-     * @returns {{x: number, y: number}} - Cartesian coordinates.
+     *  Helper to convert polar coordinates to Cartesian coordinates.
+     *  @param {number} centerX - The X coordinate of the center.
+     *  @param {number} centerY - The Y coordinate of the center.
+     *  @param {number} angle - The angle in radians.
+     *  @param {number} radius - The distance from the center.
+     *  @returns {{x: number, y: number}} - Cartesian coordinates.
      */
     function getPoint(centerX, centerY, angle, radius) {
         return {
