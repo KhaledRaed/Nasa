@@ -9,6 +9,7 @@
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link rel="stylesheet" href="../Css/styles.css">
     <link
         href="https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
         rel="stylesheet">
@@ -39,75 +40,6 @@
             align-items: center;
         }
 
-        .stars-container {
-            position: fixed;
-            top: 0;
-            left: 0;
-            width: 100%;
-            height: 100%;
-            pointer-events: none;
-            z-index: -1;
-            background: radial-gradient(ellipse at center,
-                    rgba(10, 17, 40, 1) 0%,
-                    rgba(0, 0, 0, 1) 100%);
-        }
-
-        .nebula {
-            position: absolute;
-            width: 600px;
-            height: 600px;
-            border-radius: 50%;
-            background: radial-gradient(circle, rgba(138, 43, 226, 0.15) 0%, rgba(138, 43, 226, 0.08) 30%, transparent 70%);
-            filter: blur(40px);
-            animation: float 60s infinite ease-in-out;
-            opacity: 0.5;
-        }
-
-        .nebula:nth-child(2) {
-            background: radial-gradient(circle, rgba(30, 144, 255, 0.15) 0%, rgba(30, 144, 255, 0.08) 30%, transparent 70%);
-            width: 800px;
-            height: 800px;
-            animation-duration: 80s;
-            animation-delay: -20s;
-            top: 20%;
-            left: 60%;
-        }
-
-        .nebula:nth-child(3) {
-            background: radial-gradient(circle, rgba(255, 20, 147, 0.15) 0%, rgba(255, 20, 147, 0.08) 30%, transparent 70%);
-            width: 500px;
-            height: 500px;
-            animation-duration: 70s;
-            animation-delay: -40s;
-            top: 60%;
-            left: 20%;
-        }
-
-        .nebula:nth-child(4) {
-            background: radial-gradient(circle, rgba(14, 165, 233, 0.12) 0%, rgba(14, 165, 233, 0.06) 30%, transparent 70%);
-            width: 700px;
-            height: 700px;
-            animation-duration: 90s;
-            animation-delay: -60s;
-            top: 40%;
-            left: 80%;
-        }
-
-        @keyframes float {
-
-            0%,
-            100% {
-                transform: translate(0, 0) scale(1);
-            }
-
-            33% {
-                transform: translate(30px, -30px) scale(1.1);
-            }
-
-            66% {
-                transform: translate(-20px, 20px) scale(0.9);
-            }
-        }
 
         .glass-card {
             background: rgba(10, 17, 40, 0.8);
@@ -117,22 +49,33 @@
         }
 
         #chatbox {
+
             height: 500px;
         }
 
         .chat-message {
+
             background: rgba(14, 165, 233, 0.15);
             border-radius: 1rem 1rem 1rem 0;
         }
 
         .ai-message {
+            font-family: "Space Mono", monospace;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 1.3rem;
+            font-size: 1.3rem;
             background: rgba(168, 85, 247, 0.15);
             border-radius: 1rem 1rem 0 1rem;
         }
 
         .result-title {
+            font-family: "Space Mono", monospace;
+            font-weight: 400;
+            font-style: normal;
+            font-size: 1.3rem;
             text-shadow: 0 0 10px rgba(14, 165, 233, 0.8);
-            letter-spacing: 2px;
+            letter-spacing: 1px;
         }
 
         .parameter-label {
@@ -211,7 +154,7 @@
     </div>
 
     <script>
-        const apiKey = ""; // OpenAI API key إذا حاب تشغل الشات
+        const apiKey = ""; // OpenAI API key
         const apiUrl = "https://api.openai.com/v1/chat/completions";
         const modelName = "gpt-4o-mini";
         let chatHistory = [];
@@ -228,19 +171,17 @@
                 result = parsed.result || result;
             }
 
-            // عرض الـ input data
             const dataList = document.getElementById('data-list');
             dataList.innerHTML = "";
             Object.entries(inputData).forEach(([key, value]) => {
                 const itemHtml = `
-          <div class="flex flex-col p-3 rounded-lg bg-gray-800/50 hover:bg-gray-700/50 transition duration-200">
-              <p class="parameter-label text-xs font-bold uppercase text-blue-400 mb-1">${key}</p>
-              <p class="text-xl font-extrabold text-white">${value}</p>
-          </div>`;
+            <div class="flex flex-col p-3 rounded-lg bg-gray-800/50 hover:bg-gray-700/50 transition duration-200">
+                <p class="parameter-label text-xs font-bold uppercase text-blue-400 mb-1">${key}</p>
+                <p class="text-xl font-extrabold text-white">${value}</p>
+            </div>`;
                 dataList.innerHTML += itemHtml;
             });
 
-            // --- Confidence: منزلتين عشريتين بدون تقريب ---
             document.getElementById('classification-text').textContent = result.classification || "N/A";
             if (result.confidence_score !== undefined) {
                 const confidenceValue = Math.floor(result.confidence_score * 10000) / 100;
@@ -251,7 +192,6 @@
             document.getElementById('initial-ai-response').innerHTML =
                 result.result_detail || "Analysis complete!";
 
-            // جهز الشات
             chatHistory.push({ role: "assistant", parts: [{ text: result.result_detail || "" }] });
             document.getElementById('chat-form').addEventListener('submit', handleChatSubmit);
         }
@@ -346,6 +286,7 @@
 
         window.onload = initPage;
     </script>
+    <script src="../Js/main.js"></script>
 </body>
 
 </html>

@@ -97,6 +97,8 @@
     text-align: center;
     transition: all 0.3s ease;
     font-family: "Space Mono", monospace;
+    font-size: 0.85rem;
+    font-weight: 500;
 }
 
 .file-label:hover {
