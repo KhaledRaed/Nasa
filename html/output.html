@@ -10,7 +10,7 @@
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link
-        href="https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700;display=swap"
+        href="https://fonts.googleapis.com/css2?family=MuseoModerno:ital,wght@0,100..900;1,100..900&family=Space+Mono:ital,wght@0,400;0,700;1,400;1,700&display=swap"
         rel="stylesheet">
 
     <style>
@@ -139,10 +139,8 @@
             font-family: 'Space Mono', monospace;
             color: var(--color-accent-blue);
         }
-        
-        /* NEW FLEXIBLE GRID CLASS for optimal responsiveness */
+
         .responsive-data-grid {
-            /* Create columns that auto-fit. Each column will be at least 150px wide. */
             grid-template-columns: repeat(auto-fit, minmax(150px, 1fr));
         }
     </style>
@@ -172,9 +170,8 @@
                 <h2 class="text-2xl font-semibold mb-4 text-center border-b pb-3 border-gray-700">
                     <i class="fas fa-microscope text-2xl mr-2 text-blue-400"></i> Input Parameters Analysis
                 </h2>
-                <div id="data-list"
-                    class="grid responsive-data-grid gap-y-4 gap-x-4 pr-2"></div>
-                </div>
+                <div id="data-list" class="grid responsive-data-grid gap-y-4 gap-x-4 pr-2"></div>
+            </div>
 
             <div class="lg:w-1/2 w-full p-6 glass-card rounded-xl flex flex-col">
                 <h2 class="text-2xl font-semibold mb-4 text-center border-b pb-3 border-gray-700">
@@ -214,127 +211,118 @@
     </div>
 
     <script>
-        // --- OPENAI API CONFIG ---
-        const apiKey = ""; // <---- IMPORTANT: Paste your OpenAI API key here for authentication.
-        const apiUrl = "https://api.openai.com/v1/chat/completions"; 
-        const modelName = "gpt-4o-mini"; 
-
-        // Simulated Exoplanet Data (The core data the AI uses for context)
-        const simulatedInputData = [
-            { label: "Orbital Period", value: 3.5225, unit: "days", description: "Time to orbit the star." },
-            { label: "Transit Duration", value: 2.96, unit: "hours", description: "Time planet blocks starlight." },
-            { label: "Stellar Mass", value: 0.82, unit: "M☉", description: "Mass of the host star." },
-            { label: "Stellar Radius", value: 0.78, unit: "R☉", description: "Size of the host star." },
-            { label: "Stellar Temp", value: 5200, unit: "K", description: "Surface temp of the star." },
-            { label: "Planet Radius", value: 1.25, unit: "R🜨", description: "Size of the exoplanet." },
-            { label: "Planet Mass", value: 2.1, unit: "M🜨", description: "Mass of the exoplanet." },
-            { label: "Equilibrium Temp", value: 305, unit: "K", description: "Estimated surface temp." },
-            { label: "Insolation Flux", value: 1.5, unit: "flux", description: "Energy received from the star." },
-            { label: "Eccentricity", value: 0.0, unit: "", description: "Orbital path shape." },
-            { label: "Density", value: 4.8, unit: "g/cm³", description: "Average density of the planet." },
-            { label: "Transits Count", value: 150, unit: "", description: "Number of observed transits." },
-            { label: "Detection Method", value: 1, unit: "", description: "Encoded detection method." },
-            { label: "Semi-Major Axis", value: 0.045, unit: "AU", description: "Distance from the star." },
-            { label: "Albedo", value: 0.35, unit: "", description: "Reflectivity of the planet." }
-        ];
-
-        // The primary classification result (simulated AI output)
-        const simulatedResult = {
-            classification: "Confirmed Super-Earth",
-            confidence_score: 0.985,
-            result_detail: "This object exhibits characteristics consistent with a Super-Earth planet within the habitable zone of a K-type dwarf star."
-        };
-
-        let chatHistory = []; 
-
-        const SYSTEM_INSTRUCTION = `You are Astro-AI, an expert in exoplanet classification and astronomy.
-Your current context is the analysis of a celestial body classified as: **${simulatedResult.classification}** with a confidence score of **${(simulatedResult.confidence_score * 100).toFixed(1)}%**.
-Answer all user questions concisely and clearly.
-Use LaTeX formatting for equations.
-Keep the tone informative and encouraging.`;
-
-        // ----------------------------------------------------------------------
+        const apiKey = ""; // OpenAI API key إذا حاب تشغل الشات
+        const apiUrl = "https://api.openai.com/v1/chat/completions";
+        const modelName = "gpt-4o-mini";
+        let chatHistory = [];
 
         // --- Init Page ---
         function initPage() {
-            const dataList = document.getElementById('data-list'); 
+            const stored = localStorage.getItem("exoplanetResult");
+            let inputData = {};
+            let result = { classification: "No data", confidence_score: 0, result_detail: "No analysis found." };
 
-            // Loop through the simulated data to create and insert data cards into the UI.
-            simulatedInputData.forEach(item => {
+            if (stored) {
+                const parsed = JSON.parse(stored);
+                inputData = parsed.input || {};
+                result = parsed.result || result;
+            }
+
+            // عرض الـ input data
+            const dataList = document.getElementById('data-list');
+            dataList.innerHTML = "";
+            Object.entries(inputData).forEach(([key, value]) => {
                 const itemHtml = `
-            <div class="flex flex-col p-3 rounded-lg bg-gray-800/50 hover:bg-gray-700/50 transition duration-200 cursor-pointer group">
-            <p class="parameter-label text-xs font-bold uppercase text-blue-400 mb-1">${item.label}</p>
-            <p class="text-xl font-extrabold text-white">
-                ${item.value} <span class="text-sm text-gray-400">${item.unit}</span>
-            </p>
-            <p class="text-gray-500 text-xs mt-1 italic opacity-0 group-hover:opacity-100 transition">${item.description}</p>
-           </div>`;
-                dataList.innerHTML += itemHtml; 
+          <div class="flex flex-col p-3 rounded-lg bg-gray-800/50 hover:bg-gray-700/50 transition duration-200">
+              <p class="parameter-label text-xs font-bold uppercase text-blue-400 mb-1">${key}</p>
+              <p class="text-xl font-extrabold text-white">${value}</p>
+          </div>`;
+                dataList.innerHTML += itemHtml;
             });
 
-            // Set the classification and confidence text in the main header/summary area.
-            document.getElementById('classification-text').textContent = simulatedResult.classification;
-            document.getElementById('confidence-text').textContent = `Confidence: ${(simulatedResult.confidence_score * 100).toFixed(1)}%`;
+            // --- Confidence: منزلتين عشريتين بدون تقريب ---
+            document.getElementById('classification-text').textContent = result.classification || "N/A";
+            if (result.confidence_score !== undefined) {
+                const confidenceValue = Math.floor(result.confidence_score * 10000) / 100;
+                document.getElementById('confidence-text').textContent =
+                    `Confidence: ${confidenceValue.toFixed(2)}%`;
+            }
 
-            // Construct the first message from the AI.
-            const initialMessage = `Welcome! Based on the input parameters, this body is classified as a **${simulatedResult.classification}**. ${simulatedResult.result_detail}. How can I assist you?`;
-            document.getElementById('initial-ai-response').innerHTML = initialMessage; 
-            // Add the initial message to the history so the AI remembers it.
-            chatHistory.push({ role: "assistant", parts: [{ text: initialMessage }] });
+            document.getElementById('initial-ai-response').innerHTML =
+                result.result_detail || "Analysis complete!";
 
-            // Set up the event listener for the chat form submission.
+            // جهز الشات
+            chatHistory.push({ role: "assistant", parts: [{ text: result.result_detail || "" }] });
             document.getElementById('chat-form').addEventListener('submit', handleChatSubmit);
         }
 
-        // ----------------------------------------------------------------------
-
         // --- OpenAI API Call ---
         async function getOpenAIResponse() {
-            const messages = []; 
-            messages.push({ role: "system", content: SYSTEM_INSTRUCTION }); 
+            const messages = [];
+            const classification = document.getElementById('classification-text').textContent;
+            const confidence = document.getElementById('confidence-text').textContent;
 
-            // Loop through the local chatHistory and map it to the API's required message structure.
+            const SYSTEM_INSTRUCTION = `You are Astro-AI, an expert in exoplanet classification. Current result: ${classification}, ${confidence}`;
+            messages.push({ role: "system", content: SYSTEM_INSTRUCTION });
+
             chatHistory.forEach(msg => {
                 if (msg.role === "user") {
                     messages.push({ role: "user", content: msg.parts[0].text });
-                } else if (msg.role === "assistant" || msg.role === "model") {
+                } else {
                     messages.push({ role: "assistant", content: msg.parts[0].text });
                 }
             });
 
             try {
-                // Send the POST request to the OpenAI endpoint.
                 const response = await fetch(apiUrl, {
                     method: "POST",
                     headers: {
                         "Content-Type": "application/json",
-                        "Authorization": `Bearer ${apiKey}` 
+                        "Authorization": `Bearer ${apiKey}`
                     },
                     body: JSON.stringify({
                         model: modelName,
-                        messages: messages, 
-                        temperature: 0.7 
+                        messages: messages,
+                        temperature: 0.7
                     })
                 });
-
-                if (!response.ok) {
-                    throw new Error(`API call failed with status: ${response.status}`); 
-                }
-
-                const result = await response.json(); 
-                // Return the AI's generated text content.
+                const result = await response.json();
                 return result.choices[0].message.content.trim();
             } catch (error) {
-                console.error("OpenAI API Error:", error);
-                return "I am currently unable to connect. Please try again later. Ensure your API key is correct!"; 
+                return "Error: Could not connect to OpenAI API.";
             }
         }
 
-        // ----------------------------------------------------------------------
+        // --- Chat Submission Handler ---
+        async function handleChatSubmit(e) {
+            e.preventDefault();
+            const inputField = document.getElementById('chat-input');
+            const userQuery = inputField.value.trim();
+            const sendButton = document.getElementById('send-button');
+            const loadingIndicator = document.getElementById('loading-indicator');
 
-        // --- Chat UI ---
+            if (userQuery === "") return;
+
+            appendMessage('user', userQuery);
+            chatHistory.push({ role: "user", parts: [{ text: userQuery }] });
+            inputField.value = "";
+
+            sendButton.disabled = true;
+            sendButton.innerHTML = `<i class="fas fa-satellite-dish fa-spin"></i>`;
+            loadingIndicator.classList.remove('hidden');
+
+            const aiResponseText = await getOpenAIResponse();
+            appendMessage('assistant', aiResponseText);
+            chatHistory.push({ role: "assistant", parts: [{ text: aiResponseText }] });
+
+            sendButton.disabled = false;
+            sendButton.innerHTML = `<i class="fas fa-paper-plane"></i>`;
+            loadingIndicator.classList.add('hidden');
+        }
+
+        // --- Append Messages ---
         function appendMessage(sender, text) {
-            const chatbox = document.getElementById('chatbox'); 
+            const chatbox = document.getElementById('chatbox');
             const messageContainer = document.createElement('div');
             messageContainer.className = `flex ${sender === 'user' ? 'justify-end' : 'justify-start'}`;
 
@@ -352,52 +340,10 @@ Keep the tone informative and encouraging.`;
             }
 
             messageContainer.appendChild(messageBubble);
-            chatbox.appendChild(messageContainer); 
-            chatbox.scrollTop = chatbox.scrollHeight; 
+            chatbox.appendChild(messageContainer);
+            chatbox.scrollTop = chatbox.scrollHeight;
         }
 
-        // ----------------------------------------------------------------------
-
-        /**
-         * SECTION 5: Chat Submission Handler
-         * Manages the user input, loading state, API call, and chat update cycle.
-         */
-        async function handleChatSubmit(e) {
-            e.preventDefault(); 
-            const inputField = document.getElementById('chat-input');
-            const userQuery = inputField.value.trim();
-            const sendButton = document.getElementById('send-button');
-            const loadingIndicator = document.getElementById('loading-indicator');
-
-            if (userQuery === "") return; 
-
-            appendMessage('user', userQuery); 
-            chatHistory.push({ role: "user", parts: [{ text: userQuery }] }); 
-            inputField.value = ""; 
-
-            // Set loading state: disable button and show spinner.
-            sendButton.disabled = true;
-            sendButton.innerHTML = `<i class="fas fa-satellite-dish fa-spin"></i>`;
-            loadingIndicator.classList.remove('hidden');
-
-            // Call the OpenAI API and await the response.
-            const aiResponseText = await getOpenAIResponse();
-
-            appendMessage('assistant', aiResponseText); 
-            chatHistory.push({ role: "assistant", parts: [{ text: aiResponseText }] }); 
-
-            // Reset loading state: enable button and restore icon.
-            sendButton.disabled = false;
-            sendButton.innerHTML = `<i class="fas fa-paper-plane"></i>`;
-            loadingIndicator.classList.add('hidden');
-        }
-
-        // ----------------------------------------------------------------------
-
-        /**
-         * SECTION 6: Entry Point
-         * Ensures the main setup function runs after all HTML elements are loaded.
-         */
         window.onload = initPage;
     </script>
 </body>

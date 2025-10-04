@@ -87,7 +87,7 @@
                                 <input type="number" step="any" id="koi_period" name="koi_period" required>
                             </div>
                             <div class="input-group">
-                                <label for="koi_time0bk">Transit Midpoints</label>
+                                <label for="koi_time0bk">Transit Midpoint (BKJD)</label>
                                 <input type="number" step="any" id="koi_time0bk" name="koi_time0bk" required>
                             </div>
                             <div class="input-group">
@@ -95,7 +95,7 @@
                                 <input type="number" step="any" id="koi_eccen" name="koi_eccen" required>
                             </div>
                             <div class="input-group">
-                                <label for="koi_impact">Transit Impact Parameter</label>
+                                <label for="koi_impact">Impact Parameter</label>
                                 <input type="number" step="any" id="koi_impact" name="koi_impact" required>
                             </div>
                             <div class="input-group">
@@ -127,7 +127,7 @@
                                 <input type="number" step="any" id="koi_incl" name="koi_incl" required>
                             </div>
                             <div class="input-group">
-                                <label for="koi_teq">Equilibrium Temp (K)</label>
+                                <label for="koi_teq">Equilibrium Temperature (K)</label>
                                 <input type="number" step="any" id="koi_teq" name="koi_teq" required>
                             </div>
                             <div class="input-group">
@@ -161,7 +161,8 @@
                             <label for="csv-file" class="file-label">
                                 <i class="fas fa-cloud-upload-alt"></i> Choose CSV File
                             </label>
-                            <input type="file" id="csv-file" name="csv-file" accept=".csv">
+                            <!-- name must be "file" to match FastAPI -->
+                            <input type="file" id="csv-file" name="file" accept=".csv">
                         </div>
                         <button type="submit" class="cta-button submit-button">
                             <i class="fas fa-upload"></i> Upload & Analyze
