@@ -228,6 +228,21 @@
     gap: 10px;
 }
 
+.accuracy-warning {
+    font-weight: 600;
+    color: #d18400;
+    margin-top: 12px;
+    font-family: "Space Mono", monospace;
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    font-size: 0.85rem;
+    padding: 10px;
+    background: rgba(245, 158, 11, 0.1);
+    border-radius: 6px;
+    border: 1px solid rgba(245, 158, 11, 0.3);
+}
+
 .manual-guidelines {
     list-style: none;
     padding-left: 0;
